@@ -1,6 +1,7 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
 import * as query from '@/queries/article'
+import { markdownToHtml } from '@/helpers'
 
 export default function Article({ article }) {
   const router = useRouter()
@@ -14,11 +15,10 @@ export default function Article({ article }) {
       {router.isFallback ? (
         <p>Loading...</p>
       ) : (
-        <>
-          <h1>{article.title}</h1>
-
-          {article.body}
-        </>
+        <article
+          className="prose lg:prose-lg"
+          dangerouslySetInnerHTML={{ __html: article.body }}
+        />
       )}
     </div>
   )
@@ -30,7 +30,10 @@ export async function getStaticProps({ params, preview = false }) {
   return {
     props: {
       preview,
-      article,
+      article: {
+        ...article,
+        body: await markdownToHtml(article.body),
+      },
     },
   }
 }
