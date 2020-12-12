@@ -1,25 +1,45 @@
 import Link from 'next/link'
+import dayjs from 'dayjs'
 import * as query from '@/queries/article'
+import Layout from '@/components/Layout'
 
 export default function Articles({ articles }) {
   return (
-    <div>
-      <h1>Articles</h1>
+    <Layout>
+      <h1 className="text-2xl font-extrabold text-black">Articles</h1>
 
-      <div>
+      <p className="text-lg mt-6">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro atque
+        vel enim debitis natus inventore officiis quos beatae eligendi, suscipit
+        nulla eveniet rem dolores aliquam quasi quis, adipisci non mollitia.
+      </p>
+
+      <div className="mt-6">
         {articles.map((article) => (
-          <article key={article.id}>
-            <h1>
+          <article className="mt-8" key={article.id}>
+            <h1 className="text-lg font-bold no-underline">
               <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
                 <a>{article.title}</a>
               </Link>
             </h1>
 
-            <div>{article.body}</div>
+            <p className="mt-2 text-sm text-gray-500">
+              {dayjs(article._publishedAt).format('MMMM D, YYYY')}
+            </p>
+
+            <div className="mt-4 prose prose:lg">{article.excerpt}</div>
+
+            <div className="mt-6">
+              <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
+                <a className="inline-flex items-center text-blue-500 hover:underline">
+                  Read more →
+                </a>
+              </Link>
+            </div>
           </article>
         ))}
       </div>
-    </div>
+    </Layout>
   )
 }
 

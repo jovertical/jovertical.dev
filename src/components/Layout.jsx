@@ -1,8 +1,10 @@
 import * as React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import cx from 'classnames'
 
 export default function Layout({ children }) {
+  const router = useRouter()
   const [menuOpen, setMenuOpen] = React.useState(false)
 
   return (
@@ -30,19 +32,25 @@ export default function Layout({ children }) {
 
             <div className="hidden md:flex mt-3 lg:mt-4 uppercase tracking-wide text-xs">
               <Link as="/articles" href="/articles">
-                <a className="text-gray-500 hover:text-black font-semibold no-underline">
+                <a
+                  className={cx('font-bold no-underline', {
+                    'text-blue-500': router.pathname === '/articles',
+                    'text-gray-500 hover:text-black':
+                      router.pathname !== '/articles',
+                  })}
+                >
                   Articles
                 </a>
               </Link>
 
-              <Link as="/projects" href="/projects">
-                <a className="text-gray-500 hover:text-black font-semibold no-underline ml-6">
+              <Link as="/" href="/">
+                <a className="text-gray-500 hover:text-black font-bold no-underline ml-6">
                   Projects
                 </a>
               </Link>
 
               <Link as="/" href="/">
-                <a className="text-gray-500 hover:text-black font-semibold no-underline ml-6">
+                <a className="text-gray-500 hover:text-black font-bold no-underline ml-6">
                   Hire Me
                 </a>
               </Link>

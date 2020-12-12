@@ -7,6 +7,7 @@ export async function getAll() {
         id
         title
         slug
+        excerpt
         body
         _publishedAt
       }
@@ -23,7 +24,9 @@ export async function show(slug, preview = false) {
         article(filter: { slug: { eq: $slug } }) {
           title
           slug
+          excerpt
           body
+          _publishedAt
         }
       }
     `,
