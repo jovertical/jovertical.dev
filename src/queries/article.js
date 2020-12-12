@@ -27,6 +27,14 @@ export async function show(slug, preview = false) {
           excerpt
           body
           _publishedAt
+          author {
+            name
+            bio
+            twitterUrl
+            avatar {
+              url(imgixParams: {fm: jpg, fit: crop, w: 100, h: 100, sat: -100})
+            }
+          }
         }
       }
     `,

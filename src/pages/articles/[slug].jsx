@@ -30,14 +30,23 @@ export default function Article({ article }) {
 
                 <span className="whitespace-nowrap"> — written by</span>
 
-                <a
-                  className="ml-1 text-blue-500 hover:underline whitespace-nowrap"
-                  href="https://twitter.com/Jovertical"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Jovert Palonpon
-                </a>
+                {article.author && (
+                  <>
+                    {article.author.twitterUrl ? (
+                      <a
+                        className="ml-1 text-blue-500 hover:underline whitespace-nowrap"
+                        href={article.author.twitterUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {article.author.name}
+                      </a>
+                    ) : (
+                      article.author.name
+                    )}
+                  </>
+                )}
+
                 <span className="ml-1">
                   on {dayjs(article._publishedAt).format('MMMM D, YYYY')}
                 </span>
