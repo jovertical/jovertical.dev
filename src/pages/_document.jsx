@@ -8,9 +8,9 @@ export default class Document extends NextDocument {
 
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head />
-        <body>
+        <body className="font-sans text-black leading-tight antialiased">
           <Main />
           <NextScript />
         </body>
