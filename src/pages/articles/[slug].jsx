@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import dayjs from 'dayjs'
 import * as query from '@/queries/article'
 import { markdownToHtml } from '@/helpers'
+import SEO from '@/components/SEO'
 
 export default function Article({ article }) {
   const router = useRouter()
@@ -19,6 +20,11 @@ export default function Article({ article }) {
       ) : (
         <div className="max-w-2xl lg:max-w-3xl mx-auto mt-16 mb-12">
           <article>
+            <SEO
+              title={article.title + ' - Jovert Palonpon'}
+              description={article.excerpt}
+            />
+
             <header>
               <p className="text-xl text-gray-800 leading-tight">
                 <Link as="/articles" href="/articles">

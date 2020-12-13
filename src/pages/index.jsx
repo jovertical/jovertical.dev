@@ -1,9 +1,17 @@
 import Layout from '@/components/Layout'
+import SEO from '@/components/SEO'
 
 export default function Home() {
   return (
     <Layout>
       <article className="prose lg:prose-lg">
+        <header>
+          <SEO
+            title="Jovert Palonpon"
+            description="Jovert Palonpon is a Full Stack web developer"
+          />
+        </header>
+
         <h3>Lorem ipsum dolor sit amet</h3>
 
         <p>
