@@ -51,7 +51,7 @@ export default function Layout({ children }) {
 
               <Link as="/" href="/">
                 <a className="text-gray-500 hover:text-black font-bold no-underline ml-6">
-                  Hire Me
+                  Experiences
                 </a>
               </Link>
             </div>
@@ -122,7 +122,7 @@ export default function Layout({ children }) {
 
           <Link as="/" href="/">
             <a className="block mb-8 text-black font-bold no-underline">
-              Hire Me
+              Experiences
             </a>
           </Link>
         </div>

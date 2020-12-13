@@ -16,10 +16,7 @@ export default function Articles({ articles }) {
         <h1 className="text-2xl font-extrabold text-black">Articles</h1>
 
         <p className="text-lg mt-6">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro atque
-          vel enim debitis natus inventore officiis quos beatae eligendi,
-          suscipit nulla eveniet rem dolores aliquam quasi quis, adipisci non
-          mollitia.
+          Here you can read the articles I've written myself
         </p>
       </header>
 
