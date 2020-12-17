@@ -13,9 +13,11 @@ export default function Articles({ articles }) {
           description="My personal thoughts on web development and programming"
         />
 
-        <h1 className="text-4xl font-extrabold text-black">Articles</h1>
+        <h1 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100">
+          Articles
+        </h1>
 
-        <p className="text-lg mt-6">
+        <p className="text-lg text-gray-900 dark:text-gray-100 leading-loose mt-6">
           My personal thoughts on web development and programming. When I solved
           a particular problem and I thought others will encounter those also,
           I'll write those down here.
@@ -25,21 +27,25 @@ export default function Articles({ articles }) {
       <div className="mt-6">
         {articles.map((article) => (
           <article className="mt-8" key={article.id}>
-            <h1 className="text-lg font-bold no-underline">
+            <h1 className="text-lg text-gray-900 dark:text-gray-100 font-bold no-underline">
               <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
                 <a>{article.title}</a>
               </Link>
             </h1>
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
               {dayjs(article._publishedAt).format('MMMM D, YYYY')}
             </p>
 
-            <div className="mt-4 prose prose:lg">{article.excerpt}</div>
+            <p className="mt-4 text-gray-900 dark:text-gray-100 leading-relaxed max-w-xl">
+              {article.excerpt}
+            </p>
 
             <div className="mt-6">
               <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
-                <a className="hover:underline">Read more →</a>
+                <a className="text-gray-900 dark:text-gray-100 hover:underline">
+                  Read more →
+                </a>
               </Link>
             </div>
           </article>
