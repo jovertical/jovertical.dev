@@ -7,16 +7,18 @@ import * as query from '@/queries/article'
 export default function Articles({ articles }) {
   return (
     <Layout>
-      <header>
+      <header className="max-w-3xl">
         <SEO
           title="Articles - Jovert Palonpon"
           description="My personal thoughts on web development and programming"
         />
 
-        <h1 className="text-2xl font-extrabold text-black">Articles</h1>
+        <h1 className="text-4xl font-extrabold text-black">Articles</h1>
 
         <p className="text-lg mt-6">
-          Here you can read the articles I've written myself
+          My personal thoughts on web development and programming. When I solved
+          a particular problem and I thought others will encounter those also,
+          I'll write those down here.
         </p>
       </header>
 
@@ -37,9 +39,7 @@ export default function Articles({ articles }) {
 
             <div className="mt-6">
               <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
-                <a className="inline-flex items-center text-blue-500 hover:underline">
-                  Read more →
-                </a>
+                <a className="hover:underline">Read more →</a>
               </Link>
             </div>
           </article>
