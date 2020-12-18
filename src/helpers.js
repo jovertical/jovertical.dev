@@ -6,3 +6,18 @@ export async function markdownToHtml(markdown) {
   const result = await remark().use(highlight).use(html).process(markdown)
   return result.toString()
 }
+
+export function ls(key = null, defaultValue = null) {
+  if (typeof window === 'undefined') {
+    return null
+  }
+
+  if (key !== null) {
+    return localStorage.getItem(key) || defaultValue
+  }
+
+  return {
+    put: (key, value) => localStorage.setItem(key, value),
+    remove: (key) => localStorage.removeItem(key),
+  }
+}

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import * as React from 'react'
 import ThemeContext from '@/contexts/ThemeContext'
-import '@/helpers'
+import { ls } from '@/helpers'
 import 'nprogress/nprogress.css'
 import '@/styles/app.css'
 
@@ -9,7 +9,7 @@ const Progress = dynamic(() => import('@/components/Progress'), { ssr: false })
 
 export default function App({ Component, pageProps }) {
   const [theme, setTheme] = React.useState({
-    darkmode: false,
+    darkmode: ls('theme') === 'dark',
   })
 
   function toggleDarkmode() {
@@ -17,6 +17,8 @@ export default function App({ Component, pageProps }) {
   }
 
   React.useEffect(() => {
+    ls().put('theme', theme.darkmode ? 'dark' : 'light')
+
     if (theme.darkmode) {
       return document.querySelector('html').classList.add('dark')
     }
