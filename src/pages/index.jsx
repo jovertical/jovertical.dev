@@ -6,7 +6,7 @@ import * as query from '@/queries/profile'
 export default function Home({ profile }) {
   return (
     <Layout>
-      <article className="prose lg:prose-lg">
+      <article className="prose dark:prose-dark lg:prose-lg">
         <header>
           <SEO
             title="Jovert Palonpon"

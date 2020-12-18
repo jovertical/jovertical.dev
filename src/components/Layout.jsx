@@ -9,7 +9,7 @@ export default function Layout({ children }) {
   const theme = React.useContext(ThemeContext)
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <nav className="navbar">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="flex items-center justify-between h-20 md:24 lg:h-32">

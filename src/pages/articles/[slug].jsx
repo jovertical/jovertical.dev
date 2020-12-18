@@ -1,9 +1,8 @@
-import Link from 'next/link'
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
-import dayjs from 'dayjs'
 import * as query from '@/queries/article'
 import { markdownToHtml } from '@/helpers'
+import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 
 export default function Article({ article }) {
@@ -14,63 +13,35 @@ export default function Article({ article }) {
   }
 
   return (
-    <div className="px-5">
+    <Layout>
       {router.isFallback ? (
         <p>Loading...</p>
       ) : (
-        <div className="max-w-2xl lg:max-w-3xl mx-auto mt-16 mb-12">
-          <article>
+        <div className="mt-16">
+          <article className="pb-12">
             <SEO
               title={article.title + ' - Jovert Palonpon'}
               description={article.excerpt}
             />
 
-            <header>
-              <p className="text-xl text-gray-800 leading-tight">
-                <Link as="/articles" href="/articles">
-                  <a>
-                    «{' '}
-                    <span className="text-blue-500 hover:underline">back</span>
-                  </a>
-                </Link>
-
-                <span className="whitespace-nowrap"> — written by</span>
-
-                {article.author && (
-                  <>
-                    {article.author.twitterUrl ? (
-                      <a
-                        className="ml-1 text-blue-500 hover:underline whitespace-nowrap"
-                        href={article.author.twitterUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {article.author.name}
-                      </a>
-                    ) : (
-                      article.author.name
-                    )}
-                  </>
-                )}
-
-                <span className="ml-1">
-                  on {dayjs(article._publishedAt).format('MMMM D, YYYY')}
-                </span>
-              </p>
-
-              <h1 className="mt-12 text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+            <header className="max-w-xl lg:max-w-3xl mx-auto px-6 sm:px-10 lg:px-0">
+              <h1 className="text-gray-900 dark:text-gray-100 text-2xl leading-snug sm:text-3xl md:text-4xl lg:text-5xl lg:leading-tight font-bold">
                 {article.title}
               </h1>
+
+              <div className="mt-4">
+                {article.author && <p className="text-gray-600">John Doe</p>}
+              </div>
             </header>
 
             <div
-              className="mt-6 prose lg:prose-lg xl:prose-xl"
+              className="mt-6 sm:mt-8 md:mt-10 lg:mt-12 max-w-2xl lg:max-w-4xl mx-auto prose dark:prose-dark lg:prose-lg xl:prose-xl"
               dangerouslySetInnerHTML={{ __html: article.body }}
             />
           </article>
         </div>
       )}
-    </div>
+    </Layout>
   )
 }
 
