@@ -23,7 +23,6 @@ export function ls(key = null, defaultValue = null) {
   }
 
   return {
-    put: (key, value) => localStorage.setItem(key, value),
-    remove: (key) => localStorage.removeItem(key),
+    put: (...args) => localStorage.setItem(...args),
   }
 }

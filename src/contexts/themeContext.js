@@ -3,12 +3,12 @@ import { ls } from '@/helpers'
 
 export const ThemeContext = React.createContext()
 
-export const ThemeProvider = ({ initialTheme, children }) => {
+export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = React.useState(ls('theme'))
   let dark = theme === 'dark'
   let otherTheme = dark ? 'light' : 'dark'
 
-  function toggle() {
+  function flip() {
     setTheme(otherTheme)
   }
 
@@ -22,7 +22,7 @@ export const ThemeProvider = ({ initialTheme, children }) => {
   }, [theme])
 
   return (
-    <ThemeContext.Provider value={{ theme, dark, toggle }}>
+    <ThemeContext.Provider value={{ dark, flip }}>
       {children}
     </ThemeContext.Provider>
   )
