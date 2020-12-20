@@ -70,6 +70,10 @@ module.exports = {
             'code::before, code::after': {
               content: '',
             },
+            pre: {
+              color: 'var(--code-text-color)',
+              backgroundColor: 'var(--code-background-color)'
+            }
           },
         },
 

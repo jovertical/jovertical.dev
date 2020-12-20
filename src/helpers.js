@@ -4,11 +4,17 @@ import remarkStringify from 'remark-stringify'
 import remarkHtml from 'remark-html'
 
 export async function markdownToHtml(markdown) {
-  const result = await unified()
+  let transformer = unified()
     .use(remarkParse)
     .use(remarkStringify)
-    .use(remarkHtml)
-    .process(markdown)
+
+  if (typeof window === 'undefined') {
+    transformer.use(require('remark-prism'))
+  }
+
+  transformer.use(remarkHtml)
+  
+  let result = await transformer.process(markdown)
 
   return result.toString()
 }
