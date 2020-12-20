@@ -1,9 +1,15 @@
-import remark from 'remark'
-import html from 'remark-html'
-import highlight from 'remark-highlight.js'
+import unified from 'unified'
+import remarkParse from 'remark-parse'
+import remarkStringify from 'remark-stringify'
+import remarkHtml from 'remark-html'
 
 export async function markdownToHtml(markdown) {
-  const result = await remark().use(highlight).use(html).process(markdown)
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkStringify)
+    .use(remarkHtml)
+    .process(markdown)
+
   return result.toString()
 }
 

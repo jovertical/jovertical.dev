@@ -2,19 +2,19 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import cx from 'classnames'
-import ThemeContext from '@/contexts/ThemeContext'
+import { ThemeContext } from '@/contexts/themeCtx'
 
 export default function Layout({ children }) {
   const router = useRouter()
   const theme = React.useContext(ThemeContext)
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-primary dark:bg-primary-dark">
       <nav className="navbar">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="flex items-center justify-between h-20 md:24 lg:h-32">
             <Link href="/">
-              <a className="flex items-center text-gray-900 dark:text-gray-100">
+              <a className="flex items-center text-secondary dark:text-secondary-dark">
                 <svg
                   className="w-7 h-7"
                   fill="none"
@@ -42,9 +42,9 @@ export default function Layout({ children }) {
                   className={cx(
                     'block font-bold px-2 md:px-4 lg:px-6 focus:outline-none transform transition-colors duration-200',
                     {
-                      'text-gray-900 dark:text-gray-100':
+                      'text-accent dark:text-accent-dark':
                         router.pathname === '/articles',
-                      'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100':
+                      'text-secondary dark:text-secondary-dark hover:text-accent dark:hover:text-accent-dark':
                         router.pathname !== '/articles',
                     }
                   )}
@@ -58,9 +58,9 @@ export default function Layout({ children }) {
                   className={cx(
                     'block font-bold px-2 md:px-4 lg:px-6 focus:outline-none transform transition-colors duration-200',
                     {
-                      'text-gray-900 dark:text-gray-100':
+                      'text-accent dark:text-accent-dark':
                         router.pathname === '/projects',
-                      'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100':
+                      'text-secondary dark:text-secondary-dark hover:text-accent dark:hover:text-accent-dark':
                         router.pathname !== '/projects',
                     }
                   )}
@@ -70,7 +70,7 @@ export default function Layout({ children }) {
               </Link>
 
               <button
-                className="block text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 font-bold px-2 md:px-4 lg:px-6 focus:outline-none transform transition-colors duration-200"
+                className="block text-secondary dark:text-secondary-dark hover:text-accent dark:hover:text-accent-dark font-bold px-2 md:px-4 lg:px-6 focus:outline-none transform transition-colors duration-200"
                 title="Copy URL to clipboard"
               >
                 <svg
@@ -90,13 +90,11 @@ export default function Layout({ children }) {
               </button>
 
               <button
-                className="block text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 font-bold px-2 md:px-4 lg:px-6 focus:outline-none transform transition-colors duration-200"
-                title={`Switch to ${
-                  theme.darkmode ? 'Light mode' : 'Dark mode'
-                }`}
-                onClick={theme.toggleDarkmode}
+                className="block text-secondary dark:text-secondary-dark hover:text-accent dark:hover:text-accent-dark font-bold px-2 md:px-4 lg:px-6 focus:outline-none transform transition-colors duration-200"
+                title={`Switch to ${theme.dark ? 'Light mode' : 'Dark mode'}`}
+                onClick={theme.toggle}
               >
-                {theme.darkmode ? (
+                {theme.dark ? (
                   <svg
                     className="w-7 h-7"
                     fill="none"

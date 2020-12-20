@@ -25,22 +25,9 @@ export default function Article({ article }) {
             />
 
             <header className="max-w-xl lg:max-w-3xl mx-auto px-6 sm:px-10 lg:px-0">
-              <h1 className="text-gray-900 dark:text-gray-100 text-2xl leading-snug sm:text-3xl md:text-4xl lg:text-5xl lg:leading-tight font-bold">
+              <h1 className="text-primary dark:text-primary-dark text-2xl leading-snug sm:text-3xl md:text-4xl lg:text-5xl lg:leading-tight font-bold">
                 {article.title}
               </h1>
-
-              <div className="mt-2 md:mt-4">
-                {article.author && (
-                  <a
-                    className="text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 text-lg sm:text-xl font-bold"
-                    href={article.author?.twitterUrl}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    {article.author?.name}
-                  </a>
-                )}
-              </div>
             </header>
 
             <div
