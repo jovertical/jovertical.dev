@@ -24,6 +24,11 @@ module.exports = {
         DEFAULT: '#4a5568',
         dark: '#a0aec0',
       },
+
+      'on-accent': {
+        DEFAULT: '#f7fafc',
+        dark: '#1a202c'
+      }
     },
 
     backgroundColor: {
