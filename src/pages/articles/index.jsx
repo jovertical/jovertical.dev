@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import dayjs from 'dayjs'
 import Layout from '@/components/Layout'
+import Link from '@/components/Link'
 import SEO from '@/components/SEO'
 import * as query from '@/queries/article'
 
@@ -13,39 +13,61 @@ export default function Articles({ articles }) {
           description="My personal thoughts on web development and programming"
         />
 
-        <h1 className="text-4xl font-extrabold text-accent dark:text-accent-dark">
+        <h1
+          className="text-4xl font-extrabold text-accent dark:text-accent-dark"
+          data-cy="title"
+        >
           Articles
         </h1>
 
-        <p className="text-lg text-secondary dark:text-secondary-dark leading-loose mt-6">
-          My personal thoughts on web development and programming. When I solved
-          a particular problem and I thought others will encounter those also,
-          I'll write those down here.
+        <p
+          className="text-lg text-secondary dark:text-secondary-dark leading-loose mt-6"
+          data-cy="description"
+        >
+          My personal thoughts on web development and programming. Being a full
+          stack software engineer, I encounter a lot of problems and I just love
+          sharing how I solved these problems, so I write it down here.
         </p>
       </header>
 
       <div className="mt-6">
         {articles.map((article) => (
-          <article className="mt-8" key={article.id}>
-            <h1 className="text-lg text-primary dark:text-primary-dark font-bold no-underline">
+          <article
+            className="mt-8"
+            key={article.id}
+            data-cy={'article-' + article.id}
+          >
+            <h1
+              className="text-lg text-primary dark:text-primary-dark font-bold no-underline"
+              data-cy={`article-${article.id}-title`}
+            >
               <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
-                <a>{article.title}</a>
+                {article.title}
               </Link>
             </h1>
 
-            <p className="mt-2 text-sm text-secondary dark:text-secondary-dark">
+            <p
+              className="mt-2 text-sm text-secondary dark:text-secondary-dark"
+              data-cy={`article-${article.id}-publish-date`}
+            >
               {dayjs(article._publishedAt).format('MMMM D, YYYY')}
             </p>
 
-            <p className="mt-4 text-tertiary dark:text-tertiary-dark leading-relaxed max-w-xl">
+            <p
+              className="mt-4 text-tertiary dark:text-tertiary-dark leading-relaxed max-w-xl"
+              data-cy={`article-${article.id}-excerpt`}
+            >
               {article.excerpt}
             </p>
 
             <div className="mt-6">
-              <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
-                <a className="text-accent dark:text-accent-dark hover:underline">
-                  Read more →
-                </a>
+              <Link
+                className="text-accent dark:text-accent-dark hover:underline"
+                as={`/articles/${article.slug}`}
+                href="/articles/[slug]"
+                data-cy={`article-${article.id}-show-link`}
+              >
+                Read more →
               </Link>
             </div>
           </article>
