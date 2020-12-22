@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import 'nprogress/nprogress.css'
 import '@/styles/app.css'
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.TEST_ENV === 'integration') {
   require('@/mocks')
 }
 

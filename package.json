@@ -3,6 +3,7 @@
     "test:integration": "cypress run --headless",
     "test": "npm run test:integration",
     "dev": "next dev",
+    "dev:integration": "TEST_ENV=integration next dev --port 5000",
     "build": "next build",
     "start": "next start"
   },
@@ -24,7 +25,7 @@
     "unified": "^9.2.0"
   },
   "devDependencies": {
-    "cypress": "^6.1.0",
+    "cypress": "^6.2.0",
     "msw": "^0.24.2",
     "stylelint": "^13.8.0",
     "stylelint-config-standard": "^20.0.0"
