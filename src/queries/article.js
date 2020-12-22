@@ -2,7 +2,7 @@ import query from '@/queries/_query'
 
 export async function getAll() {
   const data = await query(`
-    {
+    query GetAllArticles {
       allArticles {
         id
         title

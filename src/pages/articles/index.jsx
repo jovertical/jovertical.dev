@@ -32,31 +32,18 @@ export default function Articles({ articles }) {
 
       <div className="mt-6">
         {articles.map((article) => (
-          <article
-            className="mt-8"
-            key={article.id}
-            data-cy={'article-' + article.id}
-          >
-            <h1
-              className="text-lg text-primary dark:text-primary-dark font-bold no-underline"
-              data-cy={`article-${article.id}-title`}
-            >
+          <article className="mt-8" key={article.id}>
+            <h1 className="text-lg text-primary dark:text-primary-dark font-bold no-underline">
               <Link as={`/articles/${article.slug}`} href="/articles/[slug]">
                 {article.title}
               </Link>
             </h1>
 
-            <p
-              className="mt-2 text-sm text-secondary dark:text-secondary-dark"
-              data-cy={`article-${article.id}-publish-date`}
-            >
+            <p className="mt-2 text-sm text-secondary dark:text-secondary-dark">
               {dayjs(article._publishedAt).format('MMMM D, YYYY')}
             </p>
 
-            <p
-              className="mt-4 text-tertiary dark:text-tertiary-dark leading-relaxed max-w-xl"
-              data-cy={`article-${article.id}-excerpt`}
-            >
+            <p className="mt-4 text-tertiary dark:text-tertiary-dark leading-relaxed max-w-xl">
               {article.excerpt}
             </p>
 
@@ -65,7 +52,6 @@ export default function Articles({ articles }) {
                 className="text-accent dark:text-accent-dark hover:underline"
                 as={`/articles/${article.slug}`}
                 href="/articles/[slug]"
-                data-cy={`article-${article.id}-show-link`}
               >
                 Read more →
               </Link>

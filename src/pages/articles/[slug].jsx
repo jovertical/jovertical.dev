@@ -27,12 +27,15 @@ export default function Article({ article }) {
 
             <header className="max-w-2xl lg:max-w-4xl mx-auto">
               <div className="text-sm text-tertiary dark:text-tertiary-dark tracking-normal">
-                <time dateTime={article._publishedAt}>
+                <time dateTime={article._publishedAt} data-cy="publish-date">
                   {dayjs(article._publishedAt).format('MMMM DD, YYYY')}
                 </time>
               </div>
 
-              <h1 className="text-primary dark:text-primary-dark text-2xl leading-snug sm:text-3xl md:text-4xl lg:text-5xl lg:leading-tight font-bold">
+              <h1
+                className="text-primary dark:text-primary-dark text-2xl leading-snug sm:text-3xl md:text-4xl lg:text-5xl lg:leading-tight font-bold"
+                data-cy="title"
+              >
                 {article.title}
               </h1>
             </header>
@@ -40,6 +43,7 @@ export default function Article({ article }) {
             <div
               className="max-w-2xl lg:max-w-4xl mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 prose dark:prose-dark lg:prose-lg xl:prose-xl"
               dangerouslySetInnerHTML={{ __html: article.body }}
+              data-cy="body"
             />
           </article>
         </div>
