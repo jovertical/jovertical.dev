@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "cypress": "^6.2.0",
+    "faker": "^5.1.0",
     "stylelint": "^13.8.0",
     "stylelint-config-standard": "^20.0.0"
   }

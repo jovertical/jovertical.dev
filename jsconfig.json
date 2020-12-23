@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "mocks/*": ["mocks/*"]
     }
   },
   "exclude": ["node_modules"]

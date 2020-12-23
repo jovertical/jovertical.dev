@@ -12,7 +12,7 @@ if (!helpers.inServer()) {
 }
 
 if (process.env.TEST_ENV === 'integration') {
-  require('@/mocks')
+  require('mocks')
 }
 
 const Progress = dynamic(() => import('@/components/Progress'), { ssr: false })

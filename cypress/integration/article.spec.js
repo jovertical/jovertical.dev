@@ -1,20 +1,26 @@
-/// <reference types="cypress" />
+import dayjs from 'dayjs'
+import factory from '../factories/article'
 
 describe('Single article', () => {
+  let article = null
+
   before(() => {
-    cy.visit('/articles/my-first-article')
+    cy.mock(factory).then((data) => {
+      article = data
+
+      cy.visit('/articles/' + article.slug)
+    })
   })
 
   it('has heading', () => {
-    cy.get('[data-cy=publish-date]').contains('January 01, 2020')
-    cy.get('[data-cy=title]').contains('My first article')
+    cy.get('[data-cy=publish-date]').contains(
+      dayjs(article._publishedAt).format('MMMM D, YYYY')
+    )
+
+    cy.get('[data-cy=title]').contains(article.title)
   })
 
-  it('has body', () => {
-    cy.get('[data-cy=body]').contains(
-      'Lorem ipsum dolor sit, amet consectetur adipisicing elit.'
-    )
-  })
+  it.skip('has body', () => {})
 
   it.skip('has table of contents', () => {})
 

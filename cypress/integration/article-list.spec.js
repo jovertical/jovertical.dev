@@ -1,8 +1,14 @@
-/// <reference types="cypress" />
+import factory from '../factories/article'
 
 describe('Article listing', () => {
+  let articles = []
+
   before(() => {
-    cy.visit('/articles')
+    cy.mock(factory, {}, 10).then((data) => {
+      articles = data
+
+      cy.visit('/articles')
+    })
   })
 
   it('has heading', () => {
@@ -14,7 +20,7 @@ describe('Article listing', () => {
   })
 
   it('displays a list of articles', () => {
-    cy.get('article').should('have.length', 2)
+    cy.get('article').should('have.length', articles.length)
   })
 
   it.skip('has pagination', () => {})
