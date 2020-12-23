@@ -27,8 +27,8 @@ module.exports = {
 
       'on-accent': {
         DEFAULT: '#f7fafc',
-        dark: '#1a202c'
-      }
+        dark: '#1a202c',
+      },
     },
 
     backgroundColor: {
@@ -52,24 +52,24 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme('textColor.tertiary'),
+            color: theme('textColor.tertiary.DEFAULT'),
             a: {
-              color: theme('textColor.tertiary'),
+              color: theme('textColor.tertiary.DEFAULT'),
               '&:hover': {
-                color: theme('textColor.accent'),
+                color: theme('textColor.accent.DEFAULT'),
               },
             },
             h1: {
-              color: theme('textColor.primary'),
+              color: theme('textColor.primary.DEFAULT'),
             },
             'h2, h3, h4, h5, h6': {
-              color: theme('textColor.accent'),
+              color: theme('textColor.accent.DEFAULT'),
             },
             'blockquote, strong': {
-              color: theme('textColor.tertiary'),
+              color: theme('textColor.tertiary.DEFAULT'),
             },
             code: {
-              color: theme('textColor.tertiary'),
+              color: theme('textColor.tertiary.DEFAULT'),
               fontWeight: 500,
             },
             'code::before, code::after': {
@@ -77,8 +77,8 @@ module.exports = {
             },
             pre: {
               color: 'var(--code-text-color)',
-              backgroundColor: 'var(--code-background-color)'
-            }
+              backgroundColor: 'var(--code-background-color)',
+            },
           },
         },
 

@@ -7,7 +7,7 @@ import ThemeFlipper from '@/components/ThemeFlipper'
 import { ThemeProvider } from '@/contexts/themeContext'
 
 export default function Layout({ children }) {
-  const router = useRouter()
+  let router = useRouter()
 
   return (
     <ThemeProvider>

@@ -1,6 +1,10 @@
 @import url('https://rsms.me/inter/inter.css');
 @import '@/styles/code.css';
 
+html {
+  scroll-behavior: smooth;
+}
+
 ::-moz-selection {
   @apply bg-accent dark:bg-accent-dark text-on-accent dark:text-on-accent-dark;
 }

@@ -1,13 +1,15 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
+import cheerio from 'cheerio'
 import dayjs from 'dayjs'
-import * as query from '@/queries/article'
-import { markdownToHtml } from '@/helpers'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
+import TOC from '@/components/TOC'
+import { markdownToHtml } from '@/helpers'
+import * as query from '@/queries/article'
 
 export default function Article({ article }) {
-  const router = useRouter()
+  let router = useRouter()
 
   if (!router.isFallback && !article?.slug) {
     return <ErrorPage statusCode={404} />
@@ -18,14 +20,14 @@ export default function Article({ article }) {
       {router.isFallback ? (
         <p>Loading...</p>
       ) : (
-        <div className="mt-16 ">
-          <article className="pb-12">
+        <div className="my-12 flex justify-between relative">
+          <article className="pb-12 min-w-0 max-w-none">
             <SEO
               title={article.title + ' - Jovert Palonpon'}
               description={article.excerpt}
             />
 
-            <header className="max-w-2xl lg:max-w-4xl mx-auto">
+            <header className="max-w-xl md:max-w-3xl">
               <div className="text-sm text-tertiary dark:text-tertiary-dark tracking-normal">
                 <time dateTime={article._publishedAt} data-cy="publish-date">
                   {dayjs(article._publishedAt).format('MMMM DD, YYYY')}
@@ -33,7 +35,8 @@ export default function Article({ article }) {
               </div>
 
               <h1
-                className="text-primary dark:text-primary-dark text-2xl leading-snug sm:text-3xl md:text-4xl lg:text-5xl lg:leading-tight font-bold"
+                id="introduction"
+                className="text-primary dark:text-primary-dark text-4xl leading-tight md:text-5xl md:leading-none font-bold"
                 data-cy="title"
               >
                 {article.title}
@@ -41,11 +44,13 @@ export default function Article({ article }) {
             </header>
 
             <div
-              className="max-w-2xl lg:max-w-4xl mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 prose dark:prose-dark lg:prose-lg xl:prose-xl"
+              className="mt-4 md:mt-8 prose dark:prose-dark lg:prose-lg"
               dangerouslySetInnerHTML={{ __html: article.body }}
               data-cy="body"
             />
           </article>
+
+          <TOC headings={article.headings} />
         </div>
       )}
     </Layout>
@@ -53,21 +58,30 @@ export default function Article({ article }) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const article = await query.show(params.slug, preview)
+  let article = await query.show(params.slug, preview)
+  let body = await markdownToHtml(article.body)
+  let $ = cheerio.load(body)
 
   return {
     props: {
       preview,
       article: {
         ...article,
-        body: await markdownToHtml(article.body),
+        body,
+        headings: $('h2, h3')
+          .toArray()
+          .map((node) => ({
+            name: node.children[1]?.data,
+            target: node.children[0]?.attribs?.href,
+            depth: parseInt(node.name.replace('h', '')) - 1,
+          })),
       },
     },
   }
 }
 
 export async function getStaticPaths() {
-  const articles = await query.getAll()
+  let articles = await query.getAll()
 
   return {
     paths: articles?.map((article) => `/articles/${article.slug}`),

@@ -1,20 +1,24 @@
 import unified from 'unified'
-import remarkParse from 'remark-parse'
-import remarkStringify from 'remark-stringify'
-import remarkHtml from 'remark-html'
+import markdown from 'remark-parse'
+import slug from 'remark-slug'
+import headings from 'remark-autolink-headings'
+import stringify from 'remark-stringify'
+import html from 'remark-html'
 
-export async function markdownToHtml(markdown) {
+export async function markdownToHtml(content) {
   let transformer = unified()
-    .use(remarkParse)
-    .use(remarkStringify)
+    .use(markdown)
+    .use(slug)
+    .use(headings)
+    .use(stringify)
 
   if (typeof window === 'undefined') {
     transformer.use(require('remark-prism'))
   }
 
-  transformer.use(remarkHtml)
-  
-  let result = await transformer.process(markdown)
+  transformer.use(html)
+
+  let result = await transformer.process(content)
 
   return result.toString()
 }
