@@ -20,7 +20,7 @@ export default function Article({ article }) {
       {router.isFallback ? (
         <p>Loading...</p>
       ) : (
-        <div className="my-12 flex justify-between relative">
+        <div className="flex justify-between relative">
           <article className="pb-12 min-w-0 max-w-none">
             <SEO
               title={article.title + ' - Jovert Palonpon'}

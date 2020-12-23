@@ -7,7 +7,7 @@ import * as query from '@/queries/article'
 export default function Articles({ articles }) {
   return (
     <Layout>
-      <header className="max-w-3xl">
+      <header className="max-w-xl md:max-w-3xl">
         <SEO
           title="Articles - Jovert Palonpon"
           description="My personal thoughts on web development and programming"

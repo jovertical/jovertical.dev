@@ -96,7 +96,7 @@ export default function Layout({ children }) {
           </div>
         </nav>
 
-        <main className="max-w-7xl mx-auto mt-4 md:mt-6 lg:mt-10 px-5 md:px-20 pb-64">
+        <main className="max-w-7xl mx-auto mt-4 md:mt-6 lg:mt-10 px-5 md:px-20 pb-56 md:pb-64 lg:pb-72">
           {children}
         </main>
 
