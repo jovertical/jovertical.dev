@@ -5,7 +5,6 @@ import dayjs from 'dayjs'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 import TOC from '@/components/TOC'
-import { markdownToHtml } from '@/helpers'
 import * as query from '@/queries/article'
 
 export default function Article({ article }) {
@@ -50,7 +49,10 @@ export default function Article({ article }) {
             />
           </article>
 
-          <TOC headings={article.headings} />
+          <TOC
+            headings={article.headings}
+            defaultTarget={'#' + router.asPath.split('#').reverse().first()}
+          />
         </div>
       )}
     </Layout>
@@ -59,8 +61,15 @@ export default function Article({ article }) {
 
 export async function getStaticProps({ params, preview = false }) {
   let article = await query.show(params.slug, preview)
-  let body = await markdownToHtml(article.body)
+  let body = await _.markdownToHtml(article.body)
   let $ = cheerio.load(body)
+  let headings = $('h2, h3')
+    .toArray()
+    .map((node) => ({
+      name: node.children[1]?.data,
+      target: node.children[0]?.attribs?.href,
+      depth: parseInt(node.name.replace('h', '')) - 1,
+    }))
 
   return {
     props: {
@@ -68,13 +77,9 @@ export async function getStaticProps({ params, preview = false }) {
       article: {
         ...article,
         body,
-        headings: $('h2, h3')
-          .toArray()
-          .map((node) => ({
-            name: node.children[1]?.data,
-            target: node.children[0]?.attribs?.href,
-            depth: parseInt(node.name.replace('h', '')) - 1,
-          })),
+        headings: [
+          { name: 'Introduction', target: '#introduction', depth: 1 },
+        ].concat(headings),
       },
     },
   }

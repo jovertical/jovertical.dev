@@ -5,6 +5,10 @@ import headings from 'remark-autolink-headings'
 import stringify from 'remark-stringify'
 import html from 'remark-html'
 
+Array.prototype.first = function () {
+  return this.length > 0 ? this[0] : null
+}
+
 export async function markdownToHtml(content) {
   let transformer = unified()
     .use(markdown)
@@ -35,4 +39,8 @@ export function ls(key = null, defaultValue = null) {
   return {
     put: (...args) => localStorage.setItem(...args),
   }
+}
+
+export function inServer() {
+  return typeof window === 'undefined'
 }

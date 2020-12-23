@@ -1,9 +1,29 @@
+import * as React from 'react'
 import cx from 'classnames'
 
-let linkClass =
-  'block mt-3 text-sm text-tertiary hover:text-accent dark:text-tertiary-dark dark:hover:text-accent-dark'
+export default function TOC({ headings, defaultTarget }) {
+  let [target, setTarget] = React.useState()
 
-export default function TOC({ headings }) {
+  function scrollEventListener() {
+    for (let t of headings.map((h) => h.target)) {
+      let targetPosition = document.querySelector(t).getBoundingClientRect().top
+
+      if (targetPosition >= 0 && targetPosition <= 400) {
+        setTarget(t)
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    setTarget(defaultTarget)
+
+    window.addEventListener('scroll', scrollEventListener)
+
+    return () => {
+      window.removeEventListener('scroll', scrollEventListener)
+    }
+  }, [])
+
   return (
     <aside className="sticky top-16 hidden lg:block max-w-xs ml-6 mt-8 h-screen">
       <nav className="text-tertiary">
@@ -11,17 +31,17 @@ export default function TOC({ headings }) {
           TABLE OF CONTENTS
         </h2>
 
-        <a href="#introduction" className={linkClass}>
-          Introduction
-        </a>
-
         {headings.map((heading, key) => (
           <a
             key={'heading-' + key}
             href={heading.target}
-            className={cx(linkClass, {
+            className={cx('block mt-3 text-sm', {
               [`ml-${(heading.depth - 1) * 3}`]: heading.depth > 1,
+              'text-tertiary hover:text-accent dark:text-tertiary-dark dark:hover:text-accent-dark':
+                target !== heading.target,
+              'text-accent dark:text-accent-dark': target === heading.target,
             })}
+            onClick={() => setTarget(heading.target)}
           >
             {heading.name}
           </a>
