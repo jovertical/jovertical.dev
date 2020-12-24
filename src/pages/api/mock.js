@@ -5,7 +5,7 @@ export default async (req, res) => {
   if (req.method === 'POST') {
     let data = JSON.stringify(req.body)
 
-    await fs.writeFile('mocks/data.json', data)
+    await fs.writeFile('src/mocks/data.json', data)
     await sleep()
 
     return res.end(data)
