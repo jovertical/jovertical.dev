@@ -25,7 +25,10 @@ export default function TOC({ headings, defaultTarget }) {
   }, [])
 
   return (
-    <aside className="sticky top-16 hidden lg:block max-w-xs ml-6 mt-8 h-screen">
+    <aside
+      className="sticky top-16 hidden lg:block max-w-xs ml-6 mt-8 h-screen"
+      data-cy="toc"
+    >
       <nav className="text-tertiary">
         <h2 className="mb-2 font-normal text-accent dark:text-accent-dark tracking-widest">
           TABLE OF CONTENTS
@@ -41,6 +44,7 @@ export default function TOC({ headings, defaultTarget }) {
                 target !== heading.target,
               'text-accent dark:text-accent-dark': target === heading.target,
             })}
+            data-cy={`heading-${key}-${heading.depth}`}
             onClick={() => setTarget(heading.target)}
           >
             {heading.name}

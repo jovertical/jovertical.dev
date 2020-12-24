@@ -26,7 +26,7 @@ export default function Article({ article }) {
               description={article.excerpt}
             />
 
-            <header className="max-w-xl md:max-w-3xl">
+            <header className="max-w-xl md:max-w-3xl" data-cy="header">
               <div className="text-sm text-tertiary dark:text-tertiary-dark tracking-normal">
                 <time dateTime={article._publishedAt} data-cy="publish-date">
                   {dayjs(article._publishedAt).format('MMMM DD, YYYY')}
