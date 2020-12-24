@@ -14,7 +14,7 @@ describe('Single article', () => {
 
   it('has heading', () => {
     cy.get('[data-cy=publish-date]').contains(
-      dayjs(article._publishedAt).format('MMMM D, YYYY')
+      dayjs(article._publishedAt).format('MMMM DD, YYYY')
     )
 
     cy.get('[data-cy=title]').contains(article.title)

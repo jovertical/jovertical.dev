@@ -5,6 +5,6 @@ Cypress.Commands.add('mock', (factory, attributes = {}, times = null) => {
   }))
 
   return cy
-    .request('POST', 'api/mocks/' + factory.resourceName, data)
+    .request('POST', 'api/mock', data)
     .then(({ body }) => (times === null ? body[0] : body))
 })

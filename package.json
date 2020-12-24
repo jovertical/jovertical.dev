@@ -3,7 +3,7 @@
     "test:integration": "cypress run --headless",
     "test": "npm run test:integration",
     "dev": "next dev",
-    "dev:integration": "TEST_ENV=integration next dev --port 5000",
+    "dev:integration": "touch ./mocks/data.json && TEST_ENV=integration next dev --port 5000",
     "build": "next build",
     "start": "next start"
   },

@@ -1,6 +1,6 @@
 import { graphql } from 'msw'
 
-export const handlers = (data) => [
+export const createHandlers = (data) => [
   graphql.query('GetAllArticles', (req, res, ctx) => {
     return res(ctx.data({ allArticles: data.reverse() }))
   }),

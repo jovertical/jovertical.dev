@@ -1,8 +1,5 @@
-import fs from 'fs'
 import { setupServer } from 'msw/node'
-import { handlers } from 'mocks/handlers'
+import { createHandlers } from 'mocks/handlers'
+import data from 'mocks/data.json'
 
-let file = fs.readFileSync('mocks/data/data.json')
-let data = JSON.parse(file.toString())
-
-export const server = setupServer(...handlers(data))
+export const server = setupServer(...createHandlers(data))

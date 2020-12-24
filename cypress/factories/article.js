@@ -1,10 +1,6 @@
 import * as faker from 'faker'
 
 class ArticleFactory {
-  get resourceName() {
-    return 'articles'
-  }
-
   definition() {
     return {
       id: faker.random.number(99999),
