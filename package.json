@@ -1,11 +1,12 @@
 {
   "scripts": {
+    "setup": "echo \"{}\" > ./src/mocks/data.json",
     "test:unit": "",
     "test:integration": "cypress run --headless",
     "test": "npm run test:unit && npm run test:integration",
-    "dev": "next dev",
-    "dev:integration": "touch ./src/mocks/data.json && TEST_ENV=integration next dev --port 5000",
-    "build": "next build",
+    "dev": "npm run setup && next dev",
+    "dev:integration": "npm run setup && TEST_ENV=integration next dev --port 5000",
+    "build": "npm run setup && next build",
     "start": "next start"
   },
   "dependencies": {
