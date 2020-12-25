@@ -1,6 +1,6 @@
 import query from '@/queries/_query'
 
-export async function getAll(preview = false) {
+export async function all(preview = false) {
   const data = await query(
     `
       query GetAllArticles {
@@ -20,8 +20,8 @@ export async function getAll(preview = false) {
   return data?.allArticles || []
 }
 
-export async function getAllPreview() {
-  return getAll(true)
+export async function allPreview() {
+  return all(true)
 }
 
 export async function show(slug, preview = false) {

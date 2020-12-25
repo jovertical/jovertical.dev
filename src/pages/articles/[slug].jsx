@@ -90,7 +90,7 @@ export async function getStaticProps({ params, preview = false }) {
 }
 
 export async function getStaticPaths() {
-  let articles = await query.getAllPreview()
+  let articles = await query.allPreview()
 
   return {
     paths: articles?.map((article) => `/articles/${article.slug}`),

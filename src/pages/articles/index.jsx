@@ -1,34 +1,18 @@
 import dayjs from 'dayjs'
+import Header from '@/components/Header'
+import Icon from '@/components/Icon'
 import Layout from '@/components/Layout'
 import Link from '@/components/Link'
-import SEO from '@/components/SEO'
+import ArrowRightIcon from '@/components/icons/ArrowRight'
 import * as query from '@/queries/article'
 
 export default function Articles({ articles }) {
   return (
     <Layout>
-      <header className="max-w-xl md:max-w-3xl">
-        <SEO
-          title="Articles - Jovert Palonpon"
-          description="My personal thoughts on web development and programming"
-        />
-
-        <h1
-          className="text-4xl font-extrabold text-accent dark:text-accent-dark"
-          data-cy="title"
-        >
-          Articles
-        </h1>
-
-        <p
-          className="text-lg text-secondary dark:text-secondary-dark leading-loose mt-6"
-          data-cy="description"
-        >
-          My personal thoughts on web development and programming. Being a full
-          stack software engineer, I encounter a lot of problems and I just love
-          sharing how I solved these problems, so I write it down here.
-        </p>
-      </header>
+      <Header
+        title="Articles"
+        description="My personal thoughts on web development and programming. Being a full stack software engineer, I encounter a lot of problems and I just love sharing how I solved these problems, so I write it down here."
+      />
 
       <div className="mt-6">
         {articles.map((article) => (
@@ -49,11 +33,15 @@ export default function Articles({ articles }) {
 
             <div className="mt-6">
               <Link
-                className="text-accent dark:text-accent-dark hover:underline"
+                className="inline-flex items-center text-accent dark:text-accent-dark"
                 as={`/articles/${article.slug}`}
                 href="/articles/[slug]"
               >
-                Read more →
+                <span>Read more</span>
+
+                <Icon size="small" className="ml-1">
+                  <ArrowRightIcon />
+                </Icon>
               </Link>
             </div>
           </article>
@@ -64,7 +52,7 @@ export default function Articles({ articles }) {
 }
 
 export async function getStaticProps() {
-  const articles = await query.getAll()
+  const articles = await query.all()
 
   return {
     props: { articles },

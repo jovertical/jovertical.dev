@@ -2,7 +2,7 @@ import cx from 'classnames'
 
 export default function Icon({
   size = 'regular',
-  variant = 'filled',
+  variant = 'outlined',
   className,
   children,
 }) {
