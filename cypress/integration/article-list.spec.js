@@ -13,10 +13,7 @@ describe('Article listing', () => {
 
   it('has heading', () => {
     cy.get('[data-cy=title]').contains('Articles')
-
-    cy.get('[data-cy=description]').contains(
-      'My personal thoughts on web development and programming.'
-    )
+    cy.get('[data-cy=description]').should('not.be.empty')
   })
 
   it('displays a list of articles', () => {
