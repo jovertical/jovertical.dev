@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 import TOC from '@/components/TOC'
+import formatMarkdown from '@/helpers/formatMarkdown'
 import * as query from '@/queries/article'
 
 export default function Article({ article }) {
@@ -27,11 +28,13 @@ export default function Article({ article }) {
             />
 
             <header className="max-w-xl md:max-w-3xl" data-cy="header">
-              <div className="text-sm text-tertiary dark:text-tertiary-dark tracking-normal">
-                <time dateTime={article._publishedAt} data-cy="publish-date">
-                  {dayjs(article._publishedAt).format('MMMM DD, YYYY')}
-                </time>
-              </div>
+              {article._publishedAt && (
+                <div className="text-sm text-tertiary dark:text-tertiary-dark tracking-normal">
+                  <time dateTime={article._publishedAt} data-cy="publish-date">
+                    {dayjs(article._publishedAt).format('MMMM DD, YYYY')}
+                  </time>
+                </div>
+              )}
 
               <h1
                 id="introduction"
@@ -61,7 +64,7 @@ export default function Article({ article }) {
 
 export async function getStaticProps({ params, preview = false }) {
   let article = await query.show(params.slug, preview)
-  let body = await _.markdownToHtml(article.body)
+  let body = await formatMarkdown(article?.body)
   let $ = cheerio.load(body)
   let headings = $('h2, h3')
     .toArray()
@@ -79,14 +82,15 @@ export async function getStaticProps({ params, preview = false }) {
         body,
         headings: [
           { name: 'Introduction', target: '#introduction', depth: 1 },
-        ].concat(headings),
+          ...headings,
+        ],
       },
     },
   }
 }
 
 export async function getStaticPaths() {
-  let articles = await query.getAll()
+  let articles = await query.getAllPreview()
 
   return {
     paths: articles?.map((article) => `/articles/${article.slug}`),

@@ -4,11 +4,11 @@ import * as helpers from '@/helpers'
 import '@/styles/app.css'
 
 if (helpers.inServer()) {
-  global._ = helpers
+  global.Jovertical = helpers
 }
 
 if (!helpers.inServer()) {
-  window._ = helpers
+  window.Jovertical = helpers
 }
 
 if (process.env.TEST_ENV === 'integration') {

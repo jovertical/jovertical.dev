@@ -1,20 +1,27 @@
 import query from '@/queries/_query'
 
-export async function getAll() {
-  const data = await query(`
-    query GetAllArticles {
-      allArticles {
-        id
-        title
-        slug
-        excerpt
-        body
-        _publishedAt
+export async function getAll(preview = false) {
+  const data = await query(
+    `
+      query GetAllArticles {
+        allArticles {
+          id
+          title
+          slug
+          excerpt
+          body
+          _publishedAt
+        }
       }
-    }
-  `)
+    `,
+    { preview }
+  )
 
   return data?.allArticles || []
+}
+
+export async function getAllPreview() {
+  return getAll(true)
 }
 
 export async function show(slug, preview = false) {

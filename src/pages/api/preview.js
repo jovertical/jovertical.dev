@@ -10,13 +10,13 @@ export default async (req, res) => {
   }
 
   // Model lookup table
-  const queries = {
+  let queries = {
     articles: require('@/queries/article'),
     // Add other queries here
   }
 
   // Given query `?slug=/articles/my-first-article`: [my-first-article, articles]
-  const [slug, type] = req.query.slug.split('/').reverse()
+  let [slug, type] = req.query.slug.split('/').reverse()
 
   // Check if model type exists in the lookup table
   if (!queries[type]) {
@@ -24,7 +24,7 @@ export default async (req, res) => {
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
-  const content = await queries[type].showPreview(slug)
+  let content = await queries[type].showPreview(slug)
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!content) {

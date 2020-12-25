@@ -1,9 +1,10 @@
 import * as React from 'react'
+import ls from '@/helpers/ls'
 
 export const ThemeContext = React.createContext()
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = React.useState(_.ls('theme'))
+  let [theme, setTheme] = React.useState(ls('theme'))
   let dark = theme === 'dark'
   let otherTheme = dark ? 'light' : 'dark'
 
@@ -17,7 +18,7 @@ export const ThemeProvider = ({ children }) => {
     el.classList.remove(otherTheme)
     el.classList.add(theme)
 
-    _.ls().put('theme', theme)
+    ls().put('theme', theme)
   }, [theme])
 
   return (
