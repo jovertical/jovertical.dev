@@ -31,21 +31,21 @@ export default function MobileNavigation() {
       <div className={cx('relative z-10', { hidden: !open, block: open })}>
         <div className="w-full h-screen fixed bg-primary dark:bg-primary-dark opacity-90">
           <nav className="right-0 h-screen mt-auto py-48 px-6 fixed flex flex-col items-end font-medium text-primary dark:text-primary-dark tracking-widest">
-            <Link className="flex-grow" href="/">
-              HOME
-            </Link>
+            <div className="flex-grow">
+              <Link href="/">HOME</Link>
+            </div>
 
-            <Link className="flex-grow" href="/articles">
-              ARTICLES
-            </Link>
+            <div className="flex-grow">
+              <Link href="/articles">ARTICLES</Link>
+            </div>
 
-            <Link className="flex-grow" href="/projects">
-              PROJECTS
-            </Link>
+            <div className="flex-grow">
+              <Link href="/projects">PROJECTS</Link>
+            </div>
 
-            <Link className="flex-grow" href="/about">
-              ABOUT
-            </Link>
+            <div className="flex-grow">
+              <Link href="/about">ABOUT</Link>
+            </div>
 
             <ThemeFlipper />
           </nav>
