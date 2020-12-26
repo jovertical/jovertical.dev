@@ -4,12 +4,15 @@ import MoonIcon from '@/components/icons/Moon'
 import SunIcon from '@/components/icons/Sun'
 import { ThemeContext } from '@/contexts/themeContext'
 
-export default function ThemeFlipper() {
+export default function ThemeFlipper({ className }) {
   const theme = React.useContext(ThemeContext)
 
   return (
     <button
-      className="block text-secondary dark:text-secondary-dark hover:text-accent dark:hover:text-accent-dark font-bold px-2 md:px-4 lg:px-6 focus:outline-none transform transition-colors duration-200"
+      className={cx(
+        'block text-secondary dark:text-secondary-dark hover:text-accent dark:hover:text-accent-dark font-bold px-2 md:px-4 lg:px-6 focus:outline-none transform transition-colors duration-200',
+        className
+      )}
       title={`Switch to ${theme.dark ? 'Light mode' : 'Dark mode'}`}
       onClick={theme.flip}
     >

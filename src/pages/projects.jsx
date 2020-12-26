@@ -1,14 +1,14 @@
 import ExternalLink from '@/components/ExternalLink'
-import Header from '@/components/Header'
 import Icon from '@/components/Icon'
 import Layout from '@/components/Layout'
+import PageHeader from '@/components/PageHeader'
 import ExternalLinkIcon from '@/components/icons/ExternalLink'
 import * as query from '@/queries/project'
 
 export default function Projects({ projects }) {
   return (
     <Layout>
-      <Header
+      <PageHeader
         title="Projects"
         description="Being a part of a project in other companies pays the bills but are usually not that fun, so here's my side projects over the years. I did web projects for the majority but I made some mobile apps too."
       />

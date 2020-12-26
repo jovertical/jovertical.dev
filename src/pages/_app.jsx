@@ -1,15 +1,14 @@
 import dynamic from 'next/dynamic'
+import classnames from 'classnames'
 import 'nprogress/nprogress.css'
 import * as helpers from '@/helpers'
+import expose from '@/helpers/expose'
 import '@/styles/app.css'
 
-if (helpers.inServer()) {
-  global.Jovertical = helpers
-}
-
-if (!helpers.inServer()) {
-  window.Jovertical = helpers
-}
+expose({
+  Jovertical: helpers,
+  cx: classnames,
+})
 
 if (process.env.TEST_ENV === 'integration') {
   require('@/mocks')

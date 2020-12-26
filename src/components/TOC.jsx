@@ -1,5 +1,4 @@
 import * as React from 'react'
-import cx from 'classnames'
 
 export default function TOC({ headings, defaultTarget }) {
   let [target, setTarget] = React.useState()

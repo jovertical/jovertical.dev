@@ -1,15 +1,15 @@
 import dayjs from 'dayjs'
-import Header from '@/components/Header'
 import Icon from '@/components/Icon'
 import Layout from '@/components/Layout'
 import Link from '@/components/Link'
+import PageHeader from '@/components/PageHeader'
 import ArrowRightIcon from '@/components/icons/ArrowRight'
 import * as query from '@/queries/article'
 
 export default function Articles({ articles }) {
   return (
     <Layout>
-      <Header
+      <PageHeader
         title="Articles"
         description="My personal thoughts on web development and programming. Being a full stack software engineer, I encounter a lot of problems and I just love sharing how I solved these problems, so I write it down here."
       />

@@ -1,5 +1,3 @@
-import cx from 'classnames'
-
 export default function Icon({
   size = 'regular',
   variant = 'outlined',
