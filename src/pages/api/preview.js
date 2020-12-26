@@ -12,19 +12,19 @@ export default async (req, res) => {
   // Model lookup table
   let queries = {
     articles: require('@/queries/article'),
-    // Add other queries here
+    pages: require('@/queries/page'),
   }
 
   // Given query `?slug=/articles/my-first-article`: [my-first-article, articles]
   let [slug, type] = req.query.slug.split('/').reverse()
 
   // Check if model type exists in the lookup table
-  if (!queries[type]) {
-    return res.status(404).json({ message: 'Invalid slug' })
+  if (!queries[type] && type !== '') {
+    return res.status(404).json({ message: 'Invalid model type' })
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
-  let content = await queries[type].showPreview(slug)
+  let content = await queries[type || 'pages'].showPreview(slug)
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!content) {
@@ -36,6 +36,9 @@ export default async (req, res) => {
 
   // Redirect to the path from the fetched model
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  res.writeHead(307, { Location: `/${type}/${content.slug}` })
+  res.writeHead(307, {
+    Location: '/' + `${type}/${content.slug}`.replace(/^\/+/g, ''),
+  })
+
   res.end()
 }

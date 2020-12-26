@@ -1,4 +1,4 @@
-import query from '@/queries/_query'
+import query from '@/helpers/query'
 
 export async function all() {
   let { allProjects } = await query(`

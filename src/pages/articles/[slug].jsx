@@ -1,11 +1,11 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
-import cheerio from 'cheerio'
 import dayjs from 'dayjs'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 import TOC from '@/components/TOC'
 import formatMarkdown from '@/helpers/formatMarkdown'
+import generateTOC from '@/helpers/generateTOC'
 import * as query from '@/queries/article'
 
 export default function Article({ article }) {
@@ -65,26 +65,18 @@ export default function Article({ article }) {
 export async function getStaticProps({ params, preview = false }) {
   let article = await query.show(params.slug, preview)
   let body = await formatMarkdown(article?.body)
-  let $ = cheerio.load(body)
-  let headings = $('h2, h3')
-    .toArray()
-    .map((node) => ({
-      name: node.children[1]?.data,
-      target: node.children[0]?.attribs?.href,
-      depth: parseInt(node.name.replace('h', '')) - 1,
-    }))
+  let headings = generateTOC(body)
 
   return {
     props: {
       preview,
-      article: {
-        ...article,
+      article: Object.assign(article || {}, {
         body,
         headings: [
           { name: 'Introduction', target: '#introduction', depth: 1 },
           ...headings,
         ],
-      },
+      }),
     },
   }
 }

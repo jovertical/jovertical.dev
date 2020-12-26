@@ -1,8 +1,8 @@
-const API_URL = 'https://graphql.datocms.com'
-const API_TOKEN = process.env.DATOCMS_API_TOKEN
+let API_URL = 'https://graphql.datocms.com'
+let API_TOKEN = process.env.DATOCMS_API_TOKEN
 
 export default async (query, { variables, preview } = {}) => {
-  const res = await fetch(API_URL + (preview ? '/preview' : ''), {
+  let res = await fetch(API_URL + (preview ? '/preview' : ''), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ export default async (query, { variables, preview } = {}) => {
     }),
   })
 
-  const json = await res.json()
+  let json = await res.json()
 
   if (json.errors) {
     console.error(json.errors)
