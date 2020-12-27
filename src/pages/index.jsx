@@ -1,15 +1,54 @@
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
+import * as articleQuery from '@/queries/article'
+import ArticleCard from '@/components/ArticleCard'
 
-export default function Home() {
+export default function Welcome({ articles }) {
   return (
     <Layout>
       <header>
         <SEO
           title="Jovert Palonpon"
-          description="Jovert Palonpon is a Full Stack web developer"
+          description="Jovert Palonpon is a Full Stack engineer"
         />
+
+        <div className="mt-12 flex flex-col-reverse lg:flex-row items-center lg:justify-between lg:space-x-6">
+          <h1
+            className="mt-12 lg:mt-0 max-w-3xl text-3xl sm:text-4xl sm:text-left md:text-center lg:text-left leading-snug md:leading-normal text-primary dark:text-primary-dark font-semibold"
+            data-cy="title"
+          >
+            Hi, I'm Jovert. <br className="mb-6 lg:hidden" />A Full Stack
+            engineer with an extensive experience in web development and loves
+            the DevOps side of things.
+          </h1>
+        </div>
       </header>
+
+      <section className="mt-64" data-cy="featured-articles">
+        <h2 className="font-normal text-accent dark:text-accent-dark tracking-widest">
+          FEATURED ARTICLES
+        </h2>
+
+        <div className="mt-3 -mx-4 md:-mx-6">
+          {articles.map((article) => (
+            <ArticleCard
+              key={article.id}
+              title={article.title}
+              body={article.excerpt}
+              slug={article.slug}
+              publishedAt={article._publishedAt}
+            />
+          ))}
+        </div>
+      </section>
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      articles: await articleQuery.allFeatured(),
+    },
+  }
 }

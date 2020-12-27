@@ -1,31 +1,39 @@
 import query from '@/helpers/query'
 
-export async function all(preview = false) {
-  const data = await query(
+export async function all(preview = false, variables = {}) {
+  let { allArticles } = await query(
     `
-      query GetAllArticles {
-        allArticles {
+      query GetAllArticles($featured: BooleanType) {
+        allArticles(filter: { featured: { eq: $featured } }) {
           id
           title
           slug
           excerpt
           body
+          featured
           _publishedAt
         }
       }
     `,
-    { preview }
+    {
+      preview,
+      variables,
+    }
   )
 
-  return data?.allArticles || []
+  return allArticles || []
 }
 
-export async function allPreview() {
-  return all(true)
+export async function allPreview(variables = {}) {
+  return all(true, variables)
+}
+
+export async function allFeatured(preview = false) {
+  return all(preview, { featured: true })
 }
 
 export async function show(slug, preview = false) {
-  const data = await query(
+  let { article } = await query(
     `
       query ArticleBySlug($slug: String) {
         article(filter: { slug: { eq: $slug } }) {
@@ -33,6 +41,7 @@ export async function show(slug, preview = false) {
           slug
           excerpt
           body
+          featured
           _publishedAt
           author {
             name
@@ -53,7 +62,7 @@ export async function show(slug, preview = false) {
     }
   )
 
-  return data?.article || null
+  return article || null
 }
 
 export async function showPreview(slug) {

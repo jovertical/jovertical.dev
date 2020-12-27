@@ -8,7 +8,7 @@ export default function Layout({ children }) {
       <div className="relative min-h-screen bg-primary dark:bg-primary-dark">
         <Header />
 
-        <main className="max-w-7xl mx-auto mt-4 md:mt-6 lg:mt-10 px-5 md:px-20 pb-64 md:pb-72 lg:pb-84">
+        <main className="container max-w-7xl m-auto mt-16 px-5 sm:px-12 md:px-24 lg:px-32 pb-64 md:pb-72 lg:pb-84">
           {children}
         </main>
 

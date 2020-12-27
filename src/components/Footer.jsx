@@ -5,7 +5,7 @@ import Icon from '@/components/Icon'
 export default function Footer() {
   return (
     <footer className="absolute bottom-0 w-full h-56 text-secondary overflow-hidden bg-secondary dark:bg-secondary-dark">
-      <div className="container h-full md:max-w-screen-md lg:max-w-screen-xl m-auto px-5 md:px-20 pb-12 pt-24">
+      <div className="container h-full md:max-w-screen-md lg:max-w-screen-xl m-auto px-5 md:px-24 lg:px-32 pb-12 pt-24">
         <div className="container flex-col justify-between md:space-y-8">
           <nav className="hidden lg:flex flex-row items-center space-x-6 justify-center md:justify-end text-sm">
             <Link

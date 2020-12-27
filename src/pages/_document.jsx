@@ -33,7 +33,7 @@ export default class Document extends NextDocument {
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
 
-        <body className="font-sans text-primary dark:text-primary-dark leading-tight antialiased">
+        <body className="font-sans text-primary dark:text-primary-dark antialiased">
           <Main />
           <NextScript />
         </body>

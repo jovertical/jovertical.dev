@@ -1,4 +1,6 @@
 import ExternalLink from '@/components/ExternalLink'
+import Card from '@/components/Card'
+import CardText from '@/components/CardText'
 import Icon from '@/components/Icon'
 import Layout from '@/components/Layout'
 import PageHeader from '@/components/PageHeader'
@@ -13,16 +15,10 @@ export default function Projects({ projects }) {
         description="Being a part of a project in other companies pays the bills but are usually not that fun, so here's my side projects over the years. I did web projects for the majority but I made some mobile apps too."
       />
 
-      <div className="mt-6">
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 sm:-mx-4 md:-mx-6">
         {projects.map((project) => (
-          <article className="mt-8" key={project.id}>
-            <h1 className="text-lg text-primary dark:text-primary-dark font-bold no-underline">
-              {project.name}
-            </h1>
-
-            <p className="mt-2 text-tertiary dark:text-tertiary-dark leading-relaxed max-w-xl">
-              {project.description}
-            </p>
+          <Card key={project.id} title={project.name}>
+            <CardText className="mt-2">{project.description}</CardText>
 
             <div className="mt-6 flex space-x-4">
               {project.websiteLink && (
@@ -41,7 +37,7 @@ export default function Projects({ projects }) {
                 />
               )}
             </div>
-          </article>
+          </Card>
         ))}
       </div>
     </Layout>

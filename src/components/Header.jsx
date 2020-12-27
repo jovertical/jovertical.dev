@@ -7,7 +7,7 @@ export default function Header() {
     <div>
       <MobileNavigation />
 
-      <header className="container m-auto px-5 sm:px-12 md:px-20 max-w-screen-xl h-32 overflow-hidden">
+      <header className="container max-w-7xl m-auto px-5 sm:px-12 md:px-24 lg:px-32 h-32 overflow-hidden">
         <nav
           className="h-full flex items-center justify-center md:justify-start space-x-6 text-sm"
           aria-label="Main Navigation"

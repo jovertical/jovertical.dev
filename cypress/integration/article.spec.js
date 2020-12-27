@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import factory from '../factories/article'
 
-describe('Single article', () => {
+describe('Single article page', () => {
   let article = null
 
   before(() => {
