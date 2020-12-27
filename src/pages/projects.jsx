@@ -23,7 +23,7 @@ export default function Projects({ projects }) {
             <div className="mt-6 flex space-x-4">
               {project.websiteLink && (
                 <ProjectExternalLink
-                  href={project.githubLink}
+                  href={project.websiteLink}
                   label="Website"
                   title="Visit website"
                 />
