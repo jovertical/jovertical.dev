@@ -15,7 +15,7 @@ export default function Projects({ projects }) {
         description="Being a part of a project in other companies pays the bills but are usually not that fun, so here's my side projects over the years. I did web projects for the majority but I made some mobile apps too."
       />
 
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 sm:-mx-4 md:-mx-6">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 -mx-4 md:-mx-6">
         {projects.map((project) => (
           <Card key={project.id} title={project.name}>
             <CardText className="mt-2">{project.description}</CardText>

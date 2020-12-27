@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 import TOC from '@/components/TOC'
+import estimateMinuteRead from '@/helpers/estimateMinuteRead'
 import formatMarkdown from '@/helpers/formatMarkdown'
 import generateTOC from '@/helpers/generateTOC'
 import * as query from '@/queries/article'
@@ -28,13 +29,21 @@ export default function Article({ article }) {
             />
 
             <header className="max-w-xl md:max-w-3xl" data-cy="header">
-              {article._publishedAt && (
-                <div className="text-sm text-tertiary dark:text-tertiary-dark tracking-normal">
+              <div className="text-sm text-tertiary dark:text-tertiary-dark tracking-normal">
+                {article._publishedAt ? (
                   <time dateTime={article._publishedAt} data-cy="publish-date">
                     {dayjs(article._publishedAt).format('MMMM DD, YYYY')}
                   </time>
-                </div>
-              )}
+                ) : (
+                  <span>Unpublished</span>
+                )}
+
+                {article.minuteRead && (
+                  <span data-cy="minute-read">
+                    {` • ${article.minuteRead} minute read`}
+                  </span>
+                )}
+              </div>
 
               <h1
                 id="introduction"
@@ -65,6 +74,7 @@ export default function Article({ article }) {
 export async function getStaticProps({ params, preview = false }) {
   let article = await query.show(params.slug, preview)
   let body = await formatMarkdown(article?.body)
+  let minuteRead = await estimateMinuteRead(article?.body)
   let headings = generateTOC(body)
 
   return {
@@ -72,6 +82,7 @@ export async function getStaticProps({ params, preview = false }) {
       preview,
       article: Object.assign(article || {}, {
         body,
+        minuteRead,
         headings: [
           { name: 'Introduction', target: '#introduction', depth: 1 },
           ...headings,

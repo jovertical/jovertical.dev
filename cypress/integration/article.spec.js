@@ -19,6 +19,8 @@ describe('Single article page', () => {
       dayjs(article._publishedAt).format('MMMM DD, YYYY')
     )
 
+    cy.get('[data-cy=minute-read]').should('not.be.empty')
+
     cy.get('[data-cy=title]').contains(article.title)
   })
 

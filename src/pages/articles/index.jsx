@@ -1,6 +1,7 @@
 import ArticleCard from '@/components/ArticleCard'
 import Layout from '@/components/Layout'
 import PageHeader from '@/components/PageHeader'
+import estimateMinuteRead from '@/helpers/estimateMinuteRead'
 import * as query from '@/queries/article'
 
 export default function Articles({ articles }) {
@@ -19,6 +20,7 @@ export default function Articles({ articles }) {
             title={article.title}
             body={article.excerpt}
             slug={article.slug}
+            minuteRead={article.minuteRead}
             publishedAt={article._publishedAt}
           />
         ))}
@@ -28,9 +30,16 @@ export default function Articles({ articles }) {
 }
 
 export async function getStaticProps() {
-  const articles = await query.all()
+  let articles = await query.all()
 
   return {
-    props: { articles },
+    props: {
+      articles: await Promise.all(
+        articles.map(async (article) => ({
+          ...article,
+          minuteRead: await estimateMinuteRead(article.body),
+        }))
+      ),
+    },
   }
 }

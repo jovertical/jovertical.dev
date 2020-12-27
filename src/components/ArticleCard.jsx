@@ -9,6 +9,7 @@ export default function ArticleCard({
   title,
   body,
   slug,
+  minuteRead,
   publishedAt,
   ...props
 }) {
@@ -23,11 +24,19 @@ export default function ArticleCard({
         </Link>
       </CardText>
 
-      {publishedAt && (
-        <CardText className="mt-2" variant="subtitle">
-          {dayjs(publishedAt).format('MMMM D, YYYY')}
-        </CardText>
-      )}
+      <div className="mt-2 flex">
+        {publishedAt && (
+          <CardText variant="subtitle">
+            {dayjs(publishedAt).format('MMMM D, YYYY')}
+          </CardText>
+        )}
+
+        {minuteRead && (
+          <CardText className="ml-1" variant="subtitle">
+            {` • ${minuteRead} minute read`}
+          </CardText>
+        )}
+      </div>
 
       <CardText className={cx({ 'mt-2': !publishedAt, 'mt-4': publishedAt })}>
         {body}
