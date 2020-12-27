@@ -1,7 +1,9 @@
 import dayjs from 'dayjs'
 import Card from '@/components/Card'
 import CardText from '@/components/CardText'
+import Icon from '@/components/Icon'
 import Link from '@/components/Link'
+import ArrowRightIcon from '@/components/icons/ArrowRight'
 
 export default function ArticleCard({
   title,
@@ -11,7 +13,7 @@ export default function ArticleCard({
   ...props
 }) {
   return (
-    <Card className="mt-2 md:mt-4" {...props}>
+    <Card {...props}>
       <CardText
         variant="title"
         className=" hover:text-accent dark:hover:text-accent-dark"
@@ -30,6 +32,20 @@ export default function ArticleCard({
       <CardText className={cx({ 'mt-2': !publishedAt, 'mt-4': publishedAt })}>
         {body}
       </CardText>
+
+      <div className="mt-6">
+        <Link
+          className="inline-flex items-center hover:text-accent dark:hover:text-accent-dark"
+          as={`/articles/${slug}`}
+          href="/articles/[slug]"
+        >
+          <span>Read more</span>
+
+          <Icon className="ml-1" variant="outlined" size="small">
+            <ArrowRightIcon />
+          </Icon>
+        </Link>
+      </div>
     </Card>
   )
 }

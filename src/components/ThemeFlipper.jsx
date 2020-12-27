@@ -17,7 +17,7 @@ export default function ThemeFlipper({ className }) {
       onClick={theme.flip}
     >
       <Icon variant="outlined" size="large">
-        {theme.dark ? <MoonIcon /> : <SunIcon />}
+        {theme.dark ? <SunIcon /> : <MoonIcon />}
       </Icon>
     </button>
   )

@@ -1,7 +1,7 @@
+import ArticleCard from '@/components/ArticleCard'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 import * as articleQuery from '@/queries/article'
-import ArticleCard from '@/components/ArticleCard'
 
 export default function Welcome({ articles }) {
   return (
@@ -33,6 +33,7 @@ export default function Welcome({ articles }) {
           {articles.map((article) => (
             <ArticleCard
               key={article.id}
+              className="mt-6"
               title={article.title}
               body={article.excerpt}
               slug={article.slug}
