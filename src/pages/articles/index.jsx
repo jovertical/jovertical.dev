@@ -1,7 +1,9 @@
+import fs from 'fs'
 import ArticleCard from '@/components/ArticleCard'
 import Layout from '@/components/Layout'
 import PageHeader from '@/components/PageHeader'
 import estimateMinuteRead from '@/helpers/estimateMinuteRead'
+import generateRss from '@/helpers/generateRss'
 import * as query from '@/queries/article'
 
 export default function Articles({ articles }) {
@@ -31,6 +33,9 @@ export default function Articles({ articles }) {
 
 export async function getStaticProps() {
   let articles = await query.all()
+  let rss = generateRss(articles)
+
+  fs.writeFileSync('public/rss.xml', rss)
 
   return {
     props: {

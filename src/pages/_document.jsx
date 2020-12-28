@@ -11,6 +11,13 @@ export default class Document extends NextDocument {
       <Html lang="en">
         <Head>
           <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="RSS feed for articles"
+            href="/rss.xml"
+          />
+
+          <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="/apple-touch-icon.png"

@@ -38,7 +38,7 @@ export default function Article({ article }) {
                   <span>Unpublished</span>
                 )}
 
-                {article.minuteRead && (
+                {article.minuteRead > 0 && (
                   <span data-cy="minute-read">
                     {` • ${article.minuteRead} minute read`}
                   </span>
