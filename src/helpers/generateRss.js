@@ -1,4 +1,4 @@
-const BASE_URL = 'https://jovertical.vercel.app'
+const BASE_URL = 'https://www.jovertical.dev'
 
 function generateItem(article) {
   return `
