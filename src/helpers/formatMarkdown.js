@@ -3,6 +3,7 @@ import markdown from 'remark-parse'
 import slug from 'remark-slug'
 import headings from 'remark-autolink-headings'
 import stringify from 'remark-stringify'
+import prism from 'remark-prism'
 import html from 'remark-html'
 
 export default async function formatMarkdown(content) {
@@ -11,6 +12,7 @@ export default async function formatMarkdown(content) {
     .use(slug)
     .use(headings)
     .use(stringify)
+    .use(prism)
     .use(html)
     .process(content)
 
