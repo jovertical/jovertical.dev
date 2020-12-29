@@ -4,12 +4,9 @@ import dayjs from 'dayjs'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
 import TOC from '@/components/TOC'
-import estimateMinuteRead from '@/helpers/estimateMinuteRead'
-import formatMarkdown from '@/helpers/formatMarkdown'
-import generateTOC from '@/helpers/generateTOC'
-import * as query from '@/queries/article'
+import Article from '@/models/Article'
 
-export default function Article({ article }) {
+export default function ArticlePage({ article }) {
   let router = useRouter()
 
   if (!router.isFallback && !article?.slug) {
@@ -56,7 +53,7 @@ export default function Article({ article }) {
 
             <div
               className="mt-4 md:mt-8 prose dark:prose-dark lg:prose-lg"
-              dangerouslySetInnerHTML={{ __html: article.body }}
+              dangerouslySetInnerHTML={{ __html: article.bodyMarkup }}
               data-cy="body"
             />
           </article>
@@ -72,28 +69,18 @@ export default function Article({ article }) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  let article = await query.show(params.slug, preview)
-  let body = await formatMarkdown(article?.body)
-  let minuteRead = await estimateMinuteRead(article?.body)
-  let headings = generateTOC(body)
-
   return {
     props: {
       preview,
-      article: Object.assign(article || {}, {
-        body,
-        minuteRead,
-        headings: [
-          { name: 'Introduction', target: '#introduction', depth: 1 },
-          ...headings,
-        ],
-      }),
+      article: await Article.query(preview)
+        .withAttribute(['bodyMarkup', 'minuteRead', 'headings'])
+        .find(params?.slug),
     },
   }
 }
 
 export async function getStaticPaths() {
-  let articles = await query.allPreview()
+  let articles = await Article.queryPreview().get()
 
   return {
     paths: articles?.map((article) => `/articles/${article.slug}`),

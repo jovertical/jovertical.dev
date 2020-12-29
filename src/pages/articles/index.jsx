@@ -2,9 +2,8 @@ import fs from 'fs'
 import ArticleCard from '@/components/ArticleCard'
 import Layout from '@/components/Layout'
 import PageHeader from '@/components/PageHeader'
-import estimateMinuteRead from '@/helpers/estimateMinuteRead'
 import generateRss from '@/helpers/generateRss'
-import * as query from '@/queries/article'
+import Article from '@/models/Article'
 
 export default function Articles({ articles }) {
   return (
@@ -32,19 +31,14 @@ export default function Articles({ articles }) {
 }
 
 export async function getStaticProps() {
-  let articles = await query.all()
+  let articles = await Article.query().withAttribute(['minuteRead']).get()
   let rss = generateRss(articles)
 
   fs.writeFileSync('public/rss.xml', rss)
 
   return {
     props: {
-      articles: await Promise.all(
-        articles.map(async (article) => ({
-          ...article,
-          minuteRead: await estimateMinuteRead(article.body),
-        }))
-      ),
+      articles,
     },
   }
 }

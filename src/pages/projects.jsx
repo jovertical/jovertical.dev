@@ -5,7 +5,7 @@ import Icon from '@/components/Icon'
 import Layout from '@/components/Layout'
 import PageHeader from '@/components/PageHeader'
 import ExternalLinkIcon from '@/components/icons/ExternalLink'
-import * as query from '@/queries/project'
+import Project from '@/models/Project'
 
 export default function Projects({ projects }) {
   return (
@@ -61,9 +61,9 @@ function ProjectExternalLink({ href, label, className, ...props }) {
 }
 
 export async function getStaticProps() {
-  const projects = await query.all()
-
   return {
-    props: { projects },
+    props: {
+      projects: await Project.get(),
+    },
   }
 }

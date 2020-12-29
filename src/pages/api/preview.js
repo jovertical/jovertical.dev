@@ -1,3 +1,6 @@
+import Article from '@/models/Article'
+import Page from '@/models/Page'
+
 export default async (req, res) => {
   // This secret should only be known to this API route and the CMS
   if (req.query.secret !== process.env.DATOCMS_PREVIEW_SECRET) {
@@ -11,8 +14,8 @@ export default async (req, res) => {
 
   // Model lookup table
   let queries = {
-    articles: require('@/queries/article'),
-    pages: require('@/queries/page'),
+    articles: Article.queryPreview(),
+    pages: Page.queryPreview(),
   }
 
   // Given query `?slug=/articles/my-first-article`: [my-first-article, articles]
@@ -24,7 +27,7 @@ export default async (req, res) => {
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
-  let content = await queries[type || 'pages'].showPreview(slug)
+  let content = await queries[type || 'pages'].find(slug)
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!content) {

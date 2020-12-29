@@ -2,8 +2,7 @@ import Error from 'next/error'
 import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
-import formatMarkdown from '@/helpers/formatMarkdown'
-import * as query from '@/queries/page'
+import PageModel from '@/models/Page'
 
 export default function Page({ page }) {
   let router = useRouter()
@@ -19,7 +18,7 @@ export default function Page({ page }) {
 
         <div
           className="prose dark:prose-dark lg:prose-lg"
-          dangerouslySetInnerHTML={{ __html: page?.body }}
+          dangerouslySetInnerHTML={{ __html: page?.bodyMarkup }}
         />
       </article>
     </Layout>
@@ -27,19 +26,18 @@ export default function Page({ page }) {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  let page = await query.show(params.slug, preview)
-  let body = await formatMarkdown(page?.body)
-
   return {
     props: {
       preview,
-      page: Object.assign(page || {}, { body }),
+      page: await PageModel.query(preview)
+        .withAttribute(['bodyMarkup'])
+        .find(params?.slug),
     },
   }
 }
 
 export async function getStaticPaths() {
-  let pages = await query.allPreview()
+  let pages = await PageModel.queryPreview().get()
 
   return {
     paths: pages?.map((page) => `/${page.slug}`),

@@ -1,8 +1,7 @@
 import ArticleCard from '@/components/ArticleCard'
 import Layout from '@/components/Layout'
 import SEO from '@/components/SEO'
-import estimateMinuteRead from '@/helpers/estimateMinuteRead'
-import * as articleQuery from '@/queries/article'
+import Article from '@/models/Article'
 
 export default function Welcome({ articles }) {
   return (
@@ -49,16 +48,11 @@ export default function Welcome({ articles }) {
 }
 
 export async function getStaticProps() {
-  let articles = await articleQuery.allFeatured()
-
   return {
     props: {
-      articles: await Promise.all(
-        articles.map(async (article) => ({
-          ...article,
-          minuteRead: await estimateMinuteRead(article.body),
-        }))
-      ),
+      articles: await Article.query()
+        .withAttribute(['minuteRead'])
+        .get({ featured: true }),
     },
   }
 }
