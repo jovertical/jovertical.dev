@@ -35,4 +35,23 @@ export default class Article extends Model {
       '_publishedAt',
     ]
   }
+
+  static featuredCollection() {
+    return this.query().get(
+      `
+        query articleList($featured: BooleanType) {
+          allArticles(filter: { featured: { eq: $featured } }) {
+            id
+            title
+            slug
+            excerpt
+            body
+            featured
+            _publishedAt
+          }
+        }
+      `,
+      { featured: true }
+    )
+  }
 }

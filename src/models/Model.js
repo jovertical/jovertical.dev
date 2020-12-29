@@ -7,8 +7,8 @@ export default class Model {
     return this.query(true)
   }
 
-  static async get(variables = {}) {
-    return this.newQuery().get(variables)
+  static async get() {
+    return this.newQuery().get()
   }
 
   static newModel() {
@@ -57,17 +57,17 @@ class Query {
   }
 
   async find(key) {
-    let { modelName } = this.model
+    let { modelName, keyName } = this.model
 
     let query = `
-      query ${modelName}By ($slug: String) {
-        ${modelName} (filter: { slug: { eq: $slug } }) {
+      query ${modelName}By ($${keyName}: String) {
+        ${modelName} (filter: { ${keyName}: { eq: $${keyName} } }) {
           ${this.model.attributeMapping.join('\n\t')}
         }
       }
     `
 
-    let response = await this.run(query, { [this.model.keyName]: key })
+    let response = await this.run(query, { [keyName]: key })
 
     if (!response[modelName]) {
       return null
@@ -80,23 +80,20 @@ class Query {
     return model.toObject()
   }
 
-  async get() {
-    let query = `
-      query ${this.model.modelName}List {
-        ${this.model.listName} {
-          ${this.model.attributeMapping.join('\n\t')}
+  async get(query = null, variables = {}) {
+    if (query === null) {
+      query = `
+        query ${this.model.modelName}List {
+          ${this.model.listName} {
+            ${this.model.attributeMapping.join('\n\t')}
+          }
         }
-      }
-    `
+      `
+    }
 
-    let response = await this.run(query)
-    let collection = response[this.model.listName] || []
+    let response = await this.run(query, variables)
 
-    let modifiedCollection = await Promise.all(
-      collection.map((item) => this.model.raw(item).loadAttributes())
-    )
-
-    return modifiedCollection.map((model) => model.toObject())
+    return this.toArray(response[this.model.listName] || [])
   }
 
   async run(query, variables = {}) {
@@ -123,5 +120,13 @@ class Query {
     }
 
     return json.data
+  }
+
+  async toArray(collection) {
+    let modifiedCollection = await Promise.all(
+      collection.map((item) => this.model.raw(item).loadAttributes())
+    )
+
+    return modifiedCollection.map((model) => model.toObject())
   }
 }
