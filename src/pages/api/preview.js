@@ -1,3 +1,4 @@
+import '@/bootstrap'
 import Article from '@/models/Article'
 import Page from '@/models/Page'
 

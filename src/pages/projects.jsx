@@ -47,7 +47,7 @@ export default function Projects({ projects }) {
 function ProjectExternalLink({ href, label, className, ...props }) {
   return (
     <ExternalLink
-      className="inline-flex items-center text-accent dark:text-accent-dark"
+      className="inline-flex items-center text-tertiary dark:text-tertiary-dark hover:text-accent dark:hover:text-accent-dark"
       href={href}
       {...props}
     >

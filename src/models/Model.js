@@ -23,8 +23,8 @@ export default class Model {
     return Reflect.construct(this, [attributes])
   }
 
-  static newQuery(model = null) {
-    return new Query(model || this.newModel())
+  static newQuery(model = null, preview) {
+    return new Query(model || this.newModel(), preview)
   }
 
   async loadAttributes(keys) {

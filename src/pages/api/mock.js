@@ -1,4 +1,5 @@
 import fs from 'fs'
+import '@/bootstrap'
 import { sleep } from '@/helpers'
 
 export default async (req, res) => {
