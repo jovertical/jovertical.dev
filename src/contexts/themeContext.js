@@ -1,4 +1,3 @@
-import * as React from 'react'
 import ls from '@/helpers/ls'
 
 export const ThemeContext = React.createContext()

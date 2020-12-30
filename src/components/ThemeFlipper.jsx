@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Icon from '@/components/Icon'
 import MoonIcon from '@/components/icons/Moon'
 import SunIcon from '@/components/icons/Sun'
