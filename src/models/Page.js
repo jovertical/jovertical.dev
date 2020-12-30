@@ -1,11 +1,6 @@
-import formatMarkdown from '@/helpers/formatMarkdown'
-import Model from '@/models/Model'
+import Content from '@/models/Content'
 
-export default class Page extends Model {
-  get bodyMarkup() {
-    return formatMarkdown(this.attributes?.body)
-  }
-
+export default class Page extends Content {
   get modelName() {
     return 'page'
   }

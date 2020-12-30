@@ -60,7 +60,11 @@ export default function ArticlePage({ article }) {
 
           <TOC
             headings={article.headings}
-            defaultTarget={'#' + router.asPath.split('#').reverse().first()}
+            defaultTarget={
+              router.asPath.includes('#')
+                ? '#' + router.asPath.split('#').reverse().first()
+                : null
+            }
           />
         </div>
       )}

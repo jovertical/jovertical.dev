@@ -1,4 +1,8 @@
 export default class Model {
+  constructor(attributes = {}) {
+    this.attributes = attributes
+  }
+
   static query(preview = false) {
     return this.newQuery(null, preview)
   }
@@ -11,8 +15,12 @@ export default class Model {
     return this.newQuery().get()
   }
 
-  static newModel() {
-    return Reflect.construct(this, [])
+  static withAttribute(keys = []) {
+    return this.newQuery().withAttribute(keys)
+  }
+
+  static newModel(attributes = {}) {
+    return Reflect.construct(this, [attributes])
   }
 
   static newQuery(model = null) {
@@ -27,13 +35,8 @@ export default class Model {
     return this
   }
 
-  raw(attributes) {
-    this.attributes = attributes
-    return this
-  }
-
-  toObject() {
-    return this.attributes
+  clone(attributes = {}) {
+    return Jovertical.clone(this, { attributes })
   }
 
   get attributeMapping() {
@@ -68,32 +71,35 @@ class Query {
     `
 
     let response = await this.run(query, { [keyName]: key })
+    let attributes = response[modelName]
 
-    if (!response[modelName]) {
+    if (!attributes) {
       return null
     }
 
-    let model = await this.model
-      .raw(response[modelName])
-      .loadAttributes(this.loadableAttributes)
-
-    return model.toObject()
+    return (await this.prepare(attributes))?.first() || null
   }
 
-  async get(query = null, variables = {}) {
-    if (query === null) {
-      query = `
-        query ${this.model.modelName}List {
-          ${this.model.listName} {
-            ${this.model.attributeMapping.join('\n\t')}
-          }
+  async get() {
+    let response = await this.run(`
+      query ${this.model.modelName}List {
+        ${this.model.listName} {
+          ${this.model.attributeMapping.join('\n\t')}
         }
-      `
-    }
+      }
+    `)
 
-    let response = await this.run(query, variables)
+    return this.prepare(response[this.model.listName] || [])
+  }
 
-    return this.toArray(response[this.model.listName] || [])
+  async prepare(collection) {
+    let models = await Promise.all(
+      [].concat(collection).map((item) => {
+        return this.model.clone(item).loadAttributes(this.loadableAttributes)
+      })
+    )
+
+    return models.map((model) => model.attributes)
   }
 
   async run(query, variables = {}) {
@@ -120,13 +126,5 @@ class Query {
     }
 
     return json.data
-  }
-
-  async toArray(collection) {
-    let modifiedCollection = await Promise.all(
-      collection.map((item) => this.model.raw(item).loadAttributes())
-    )
-
-    return modifiedCollection.map((model) => model.toObject())
   }
 }

@@ -31,7 +31,7 @@ export default function Articles({ articles }) {
 }
 
 export async function getStaticProps() {
-  let articles = await Article.query().withAttribute(['minuteRead']).get()
+  let articles = await Article.withAttribute(['minuteRead']).get()
   let rss = generateRss(articles)
 
   fs.writeFileSync('public/rss.xml', rss)

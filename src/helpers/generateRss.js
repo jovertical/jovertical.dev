@@ -22,7 +22,7 @@ export default function generate(articles) {
           My personal thoughts on web development and programming
         </description>
         <language>en</language>
-        <lastBuildDate>${articles.first()._publishedAt}</lastBuildDate>
+        <lastBuildDate>${articles.first()?._publishedAt}</lastBuildDate>
         <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml"/>
         ${articles.map(generateItem).join('')}
       </channel>

@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 export default function TOC({ headings, defaultTarget }) {
-  let [target, setTarget] = React.useState()
+  let [target, setTarget] = React.useState(null)
 
   function scrollEventListener() {
     for (let t of headings.map((h) => h.target)) {
@@ -14,7 +14,7 @@ export default function TOC({ headings, defaultTarget }) {
   }
 
   React.useEffect(() => {
-    setTarget(defaultTarget)
+    setTarget(defaultTarget || '#introduction')
 
     window.addEventListener('scroll', scrollEventListener)
 
