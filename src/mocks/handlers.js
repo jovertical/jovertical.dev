@@ -1,6 +1,6 @@
 import { graphql } from 'msw'
 
-export const createHandlers = (data) => [
+export let createHandlers = (data) => [
   graphql.query('articleList', (req, res, ctx) => {
     return res(ctx.data({ allArticles: data }))
   }),

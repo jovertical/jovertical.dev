@@ -4,7 +4,7 @@ import SunIcon from '@/components/icons/Sun'
 import { ThemeContext } from '@/contexts/themeContext'
 
 export default function ThemeFlipper({ className }) {
-  const theme = React.useContext(ThemeContext)
+  let theme = React.useContext(ThemeContext)
 
   return (
     <button

@@ -1,8 +1,8 @@
 import ls from '@/helpers/ls'
 
-export const ThemeContext = React.createContext()
+export let ThemeContext = React.createContext()
 
-export const ThemeProvider = ({ children }) => {
+export function ThemeProvider({ children }) {
   let [theme, setTheme] = React.useState(ls('theme'))
   let dark = theme === 'dark'
   let otherTheme = dark ? 'light' : 'dark'
