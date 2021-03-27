@@ -2,7 +2,8 @@ import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx) {
-    const initialProps = await NextDocument.getInitialProps(ctx)
+    let initialProps = await NextDocument.getInitialProps(ctx)
+
     return { ...initialProps }
   }
 
@@ -38,6 +39,24 @@ export default class Document extends NextDocument {
           />
 
           <link rel="manifest" href="/site.webmanifest" />
+
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          />
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `,
+            }}
+          />
         </Head>
 
         <body className="font-sans text-primary dark:text-primary-dark antialiased">
