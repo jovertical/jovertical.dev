@@ -10,6 +10,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sentry/browser": "^6.2.3",
+    "@sentry/integrations": "^6.2.3",
+    "@sentry/node": "^6.2.3",
+    "@sentry/webpack-plugin": "^1.14.2",
     "@tailwindcss/typography": "^0.3.1",
     "autoprefixer": "^10.2.5",
     "cheerio": "^1.0.0-rc.5",
@@ -35,6 +39,6 @@
   },
   "engineStrict": true,
   "engines": {
-    "node": ">= 14.x"
+    "node": "14.x"
   }
 }
