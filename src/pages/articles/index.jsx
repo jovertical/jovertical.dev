@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import ArticleCard from '@/components/ArticleCard'
 import Layout from '@/components/Layout'
 import PageHeader from '@/components/PageHeader'
@@ -32,9 +32,12 @@ export default function Articles({ articles }) {
 
 export async function getStaticProps() {
   let articles = await Article.withAttribute(['minuteRead']).get()
-  let rss = generateRss(articles)
 
-  fs.writeFileSync('public/rss.xml', rss)
+  try {
+    let rss = generateRss(articles)
+
+    await fs.writeFile('public/rss.xml', rss)
+  } catch (error) {}
 
   return {
     props: {

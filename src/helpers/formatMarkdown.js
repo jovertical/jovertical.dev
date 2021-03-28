@@ -1,17 +1,17 @@
 import unified from 'unified'
 import markdown from 'remark-parse'
-import slug from 'remark-slug'
-import headings from 'remark-autolink-headings'
-import stringify from 'remark-stringify'
-import prism from 'remark-prism'
-import html from 'remark-html'
+import remark2rehype from 'remark-rehype'
+import slug from 'rehype-slug'
+import headings from 'rehype-autolink-headings'
+import prism from '@mapbox/rehype-prism'
+import html from 'rehype-stringify'
 
 export default async function formatMarkdown(content) {
   let result = await unified()
     .use(markdown)
+    .use(remark2rehype)
     .use(slug)
     .use(headings)
-    .use(stringify)
     .use(prism)
     .use(html)
     .process(content)
