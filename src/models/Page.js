@@ -1,15 +1,15 @@
-import Content from '@/models/Content'
+import Content from '@/models/Content';
 
 export default class Page extends Content {
-  get modelName() {
-    return 'page'
-  }
+    get modelName() {
+        return 'page';
+    }
 
-  get listName() {
-    return 'allPages'
-  }
+    get listName() {
+        return 'allPages';
+    }
 
-  get attributeMapping() {
-    return ['id', 'name', 'body', 'slug', '_publishedAt']
-  }
+    get attributeMapping() {
+        return ['id', 'name', 'body', 'slug', '_publishedAt'];
+    }
 }

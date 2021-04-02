@@ -1,7 +1,7 @@
-let BASE_URL = 'https://www.jovertical.dev'
+let BASE_URL = 'https://www.jovertical.dev';
 
 function generateItem(article) {
-  return `
+    return `
     <item>
       <guid>${BASE_URL}/articles/${article.id}</guid>
       <title>${article.title}</title>
@@ -9,11 +9,11 @@ function generateItem(article) {
       <description>${article.excerpt}</description>
       <pubDate>${article._publishedAt}</pubDate>
     </item>
-  `
+  `;
 }
 
 export default function generate(articles) {
-  return `
+    return `
     <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
       <channel>
         <title>Articles - Jovert Palonpon</title>
@@ -27,5 +27,5 @@ export default function generate(articles) {
         ${articles.map(generateItem).join('')}
       </channel>
     </rss>
-  `
+  `;
 }

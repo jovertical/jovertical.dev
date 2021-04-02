@@ -1,20 +1,20 @@
-import { useRouter } from 'next/router'
-import * as googleTag from '@/helpers/googleTag'
+import { useRouter } from 'next/router';
+import * as googleTag from '@/helpers/googleTag';
 
 export default function useTracking() {
-  let router = useRouter()
+    let router = useRouter();
 
-  React.useEffect(() => {
-    let handleRouteChange = (url) => {
-      googleTag.pageViewed(url)
-    }
+    React.useEffect(() => {
+        let handleRouteChange = (url) => {
+            googleTag.pageViewed(url);
+        };
 
-    router.events.on('routeChangeComplete', handleRouteChange)
+        router.events.on('routeChangeComplete', handleRouteChange);
 
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange);
+        };
+    }, [router.events]);
 
-  return null
+    return null;
 }

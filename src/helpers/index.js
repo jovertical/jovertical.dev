@@ -1,18 +1,18 @@
 Array.prototype.first = function () {
-  return this.length > 0 ? this[0] : null
-}
+    return this.length > 0 ? this[0] : null;
+};
 
 export function inServer() {
-  return typeof window === 'undefined'
+    return typeof window === 'undefined';
 }
 
 export function sleep(ms = 1000) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export function clone(object, properties = {}) {
-  return Object.create(
-    Object.getPrototypeOf(object),
-    Object.getOwnPropertyDescriptors({ ...object, ...properties })
-  )
+    return Object.create(
+        Object.getPrototypeOf(object),
+        Object.getOwnPropertyDescriptors({ ...object, ...properties }),
+    );
 }
