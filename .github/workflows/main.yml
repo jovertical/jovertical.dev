@@ -1,0 +1,38 @@
+name: Deploy
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: ['14.x']
+
+    steps:
+      - name: Setup Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Execute tests
+        run: |
+          npm run test:lint
+          npm run test:unit
+          npm run dev:integration
+          npm run test:integration
+
+      - name: Deploy
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
