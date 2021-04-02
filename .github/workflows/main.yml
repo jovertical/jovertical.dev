@@ -8,35 +8,35 @@ name: Deploy
 on: [push]
 
 jobs:
-  chrome-integration-test:
-    runs-on: ubuntu-20.04
+  # chrome-integration-test:
+  #   runs-on: ubuntu-20.04
 
-    strategy:
-      matrix:
-        node: ['14.x']
+  #   strategy:
+  #     matrix:
+  #       node: ['14.x']
 
-    steps:
-      - name: Setup Checkout
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Setup Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cache/Cypress
-            node_modules
-          key: chrome-integration-test-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+  #     - name: Cache dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           ~/.cache/Cypress
+  #           node_modules
+  #         key: chrome-integration-test-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-      - name: Install dependencies
-        run: npm install
+  #     - name: Install dependencies
+  #       run: npm install
 
-      - name: Execute tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run dev:integration
-          browser: chrome
-          headless: true
-          install: false
+  #     - name: Execute tests
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         start: npm run dev:integration
+  #         browser: chrome
+  #         headless: true
+  #         install: false
 
   # firefox-integration-test:
   #   runs-on: ubuntu-16.04
@@ -64,7 +64,7 @@ jobs:
   #         headless: true
 
   edge-integration-test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
