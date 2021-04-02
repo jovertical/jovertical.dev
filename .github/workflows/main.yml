@@ -31,11 +31,11 @@ jobs:
 
       - name: Execute integration tests
         uses: cypress-io/github-action@v2
+        env:
+          CYPRESS_NODE_ENV: ${{ secrets.NODE_ENV }}
         with:
           start: npm run dev:integration
           headless: true
-          env:
-            CYPRESS_NODE_ENV: ${{ secrets.NODE_ENV }}
 
       - name: Deploy
         uses: amondnet/vercel-action@v20
