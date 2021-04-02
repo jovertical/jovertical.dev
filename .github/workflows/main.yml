@@ -25,7 +25,7 @@ jobs:
           path: |
             ~/.cache/Cypress
             node_modules
-          key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: chrome-integration-test-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
         run: npm install
@@ -63,26 +63,34 @@ jobs:
   #         browser: firefox
   #         headless: true
 
-  # edge-integration-test:
-  #   runs-on: macos-latest
+  edge-integration-test:
+    runs-on: macos-latest
 
-  #   strategy:
-  #     matrix:
-  #       node: ['14.x']
+    strategy:
+      matrix:
+        node: ['14.x']
 
-  #   steps:
-  #     - name: Setup Checkout
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Setup Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Install dependencies
-  #       run: npm install --only=prod
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            node_modules
+          key: edge-integration-test-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-  #     - name: Execute tests
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         start: npm run dev:integration
-  #         browser: edge
-  #         headless: true
+      - name: Install dependencies
+        run: npm install
+
+      - name: Execute tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run dev:integration
+          browser: edge
+          headless: true
 
   # deploy:
   #   - name: Setup Checkout
