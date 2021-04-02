@@ -89,7 +89,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm run dev:integration
-          browser: edge
+          browser: firefox
           headless: true
 
   # deploy:
