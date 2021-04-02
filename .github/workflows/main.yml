@@ -8,12 +8,8 @@ name: Deploy
 on: [push]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node: ['14.x']
+  chrome-integration-test:
+    runs-on: ubuntu-18.04
 
     steps:
       - name: Setup Checkout
@@ -25,30 +21,64 @@ jobs:
           path: |
             ~/.cache/Cypress
             node_modules
-          key: deploy-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: chrome-integration-test-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
         run: npm install
 
-      - name: Execute linting test
-        run: npm run test:lint
-
-      - name: Execute unit tests
-        run: npm run test:unit
-
-      - name: Execute integration tests in Chrome
+      - name: Execute tests
         uses: cypress-io/github-action@v2
         with:
           start: npm run dev:integration
           browser: chrome
           headless: true
 
-      - name: Execute integration tests in Firefox
+  firefox-integration-test:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Setup Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            node_modules
+          key: firefox-integration-test-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Execute tests
         uses: cypress-io/github-action@v2
         with:
           start: npm run dev:integration
           browser: firefox
           headless: true
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: [chrome-integration-test, firefox-integration-test]
+
+    strategy:
+      matrix:
+        node: ['14.x']
+
+    steps:
+      - name: Setup Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Execute linter test
+        run: npm run test:lint
+
+      - name: Execute unit tests
+        run: npm run test:unit
 
       - name: Deploy
         uses: amondnet/vercel-action@v20
