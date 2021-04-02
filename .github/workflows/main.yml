@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node: ['14.x']
+        node: ['12.x']
 
     steps:
       - name: Setup Checkout
@@ -29,37 +29,37 @@ jobs:
           browser: chrome
           headless: true
 
-  # firefox-integration-test:
-  #   runs-on: ubuntu-latest
+  firefox-integration-test:
+    runs-on: ubuntu-latest
 
-  #   container:
-  #     image: cypress/browsers:node12.16.1-chrome80-ff73
-  #     options: --user 1001
+    container:
+      image: cypress/browsers:node12.16.1-chrome80-ff73
+      options: --user 1001
 
-  #   strategy:
-  #     matrix:
-  #       node: ['14.x']
+    strategy:
+      matrix:
+        node: ['12.x']
 
-  #   steps:
-  #     - name: Setup Checkout
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Setup Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Install dependencies
-  #       run: npm install
+      - name: Install dependencies
+        run: npm install
 
-  #     - name: Execute tests
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         start: npm run dev:integration
-  #         browser: firefox
-  #         headless: true
+      - name: Execute tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run dev:integration
+          browser: firefox
+          headless: true
 
   edge-integration-test:
     runs-on: macos-latest
 
     strategy:
       matrix:
-        node: ['14.x']
+        node: ['12.x']
 
     steps:
       - name: Setup Checkout
