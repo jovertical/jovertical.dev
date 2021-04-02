@@ -30,7 +30,7 @@ jobs:
   #         headless: true
 
   firefox-integration-test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     container:
       image: cypress/browsers:node12.16.1-chrome80-ff73
@@ -43,6 +43,9 @@ jobs:
     steps:
       - name: Setup Checkout
         uses: actions/checkout@v2
+
+      - name: Install Linux utilities
+        run: sudo apt-get install libgbm-dev
 
       - name: Install dependencies
         run: npm install
