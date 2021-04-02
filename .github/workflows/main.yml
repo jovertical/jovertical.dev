@@ -8,62 +8,7 @@ name: Deploy
 on: [push]
 
 jobs:
-  # chrome-integration-test:
-  #   runs-on: ubuntu-20.04
-
-  #   strategy:
-  #     matrix:
-  #       node: ['14.x']
-
-  #   steps:
-  #     - name: Setup Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Cache dependencies
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: |
-  #           ~/.cache/Cypress
-  #           node_modules
-  #         key: chrome-integration-test-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
-  #     - name: Install dependencies
-  #       run: npm install
-
-  #     - name: Execute tests
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         start: npm run dev:integration
-  #         browser: chrome
-  #         headless: true
-  #         install: false
-
-  # firefox-integration-test:
-  #   runs-on: ubuntu-16.04
-
-  #   container:
-  #     image: cypress/browsers:node12.16.1-chrome80-ff73
-  #     options: --user 1001
-
-  #   strategy:
-  #     matrix:
-  #       node: ['14.x']
-
-  #   steps:
-  #     - name: Setup Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Install dependencies
-  #       run: npm install
-
-  #     - name: Execute tests
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         start: npm run dev:integration
-  #         browser: firefox
-  #         headless: true
-
-  edge-integration-test:
+  deploy:
     runs-on: ubuntu-latest
 
     strategy:
@@ -80,34 +25,35 @@ jobs:
           path: |
             ~/.cache/Cypress
             node_modules
-          key: edge-integration-test-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: deploy-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
         run: npm install
 
-      - name: Execute tests
+      - name: Execute linting test
+        run: npm run test:lint
+
+      - name: Execute unit tests
+        run: npm run test:unit
+
+      - name: Execute integration tests in Chrome
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run dev:integration
+          browser: chrome
+          headless: true
+
+      - name: Execute integration tests in Firefox
         uses: cypress-io/github-action@v2
         with:
           start: npm run dev:integration
           browser: firefox
           headless: true
 
-  # deploy:
-  #   - name: Setup Checkout
-  #     uses: actions/checkout@v2
-
-  #   - name: Install dependencies
-  #     run: npm install
-
-  #   - name: Execute tests
-  #     run: |
-  #       npm run test:lint
-  #       npm run test:unit
-
-  #   - name: Deploy
-  #     uses: amondnet/vercel-action@v20
-  #     with:
-  #       vercel-token: ${{ secrets.VERCEL_TOKEN }}
-  #       vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-  #       vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-  #       vercel-args: '--prod'
+      - name: Deploy
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
