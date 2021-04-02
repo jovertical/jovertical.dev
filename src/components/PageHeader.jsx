@@ -10,14 +10,14 @@ export default function PageHeader({ title, description }) {
             />
 
             <h1
-                className="text-4xl font-extrabold text-accent dark:text-accent-dark"
+                className="text-4xl font-extrabold text-blue dark:text-green"
                 data-cy="title"
             >
                 {title}
             </h1>
 
             <p
-                className="text-lg text-secondary dark:text-secondary-dark leading-loose mt-6"
+                className="text-lg text-gray dark:text-gray-lighter leading-loose mt-6"
                 data-cy="description"
             >
                 {description}

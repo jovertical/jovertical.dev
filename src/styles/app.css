@@ -2,17 +2,23 @@
 @import '@/styles/code.css';
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 ::-moz-selection {
-  @apply bg-accent dark:bg-accent-dark text-on-accent dark:text-on-accent-dark;
+    @apply selection;
 }
 
 ::selection {
-  @apply bg-accent dark:bg-accent-dark text-on-accent dark:text-on-accent-dark;
+    @apply selection;
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .selection {
+        @apply bg-blue-light dark:bg-green text-white dark:text-gray-dark;
+    }
+}

@@ -1,5 +1,5 @@
 {
-  "editor.formatOnSave": true,
-  "editor.tabSize": 2,
-  "css.validate": false
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "css.validate": false
 }

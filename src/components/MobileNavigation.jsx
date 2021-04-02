@@ -34,8 +34,8 @@ export default function MobileNavigation() {
             <div
                 className={cx('relative z-10', { hidden: !open, block: open })}
             >
-                <div className="w-full h-screen fixed bg-primary dark:bg-primary-dark opacity-90">
-                    <nav className="right-0 h-screen mt-auto py-48 px-6 fixed flex flex-col items-end font-medium text-primary dark:text-primary-dark tracking-widest">
+                <div className="w-full h-screen fixed bg-white dark:bg-gray-darker opacity-90">
+                    <nav className="right-0 h-screen mt-auto py-48 px-6 fixed flex flex-col items-end font-medium text-gray-dark dark:text-gray-lightest tracking-widest">
                         <div className="flex-grow">
                             <Link href="/">HOME</Link>
                         </div>

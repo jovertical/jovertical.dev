@@ -1,75 +1,56 @@
+let colors = require('tailwindcss/colors');
 let defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
     purge: ['./src/pages/**/*.jsx', './src/components/**/*.jsx'],
     darkMode: 'class',
     theme: {
-        textColor: {
-            accent: {
+        colors: {
+            blue: {
+                light: '#63b3ed',
                 DEFAULT: '#2b6cb0',
-                dark: '#81e6d9',
             },
 
-            primary: {
-                DEFAULT: '#2d3748',
-                dark: '#f7fafc',
+            green: {
+                DEFAULT: '#81e6d9',
             },
 
-            secondary: {
-                DEFAULT: '#4a5568',
-                dark: '#e2e8f0',
+            gray: {
+                lightest: '#EDF2F7',
+                lighter: '#E2E8F0',
+                light: '#A0AEC0',
+                DEFAULT: '#4A5568',
+                dark: '#2D3748',
+                darker: '#1A202C',
+                darkest: '#161B25',
             },
 
-            tertiary: {
-                DEFAULT: '#4a5568',
-                dark: '#a0aec0',
-            },
-
-            'on-accent': {
-                DEFAULT: '#f7fafc',
-                dark: '#1a202c',
-            },
-        },
-
-        backgroundColor: {
-            accent: {
-                DEFAULT: '#63b3ed',
-                dark: '#81e6d9',
-            },
-
-            primary: {
-                DEFAULT: '#ffffff',
-                dark: '#1a202c',
-            },
-
-            secondary: {
-                DEFAULT: '#edf2f7',
-                dark: '#161b25',
-            },
+            black: colors.black,
+            white: colors.white,
         },
 
         extend: {
             typography: (theme) => ({
                 DEFAULT: {
                     css: {
-                        color: theme('textColor.tertiary.DEFAULT'),
+                        color: theme('colors.gray'),
                         a: {
-                            color: theme('textColor.tertiary.DEFAULT'),
+                            color: theme('colors.gray'),
                             '&:hover': {
-                                color: theme('textColor.accent.DEFAULT'),
+                                color: theme('colors.blue.DEFAULT'),
                             },
                         },
                         h1: {
-                            color: theme('textColor.primary.DEFAULT'),
+                            color: theme('colors.gray.dark'),
                         },
                         'h2, h3, h4, h5, h6': {
-                            color: theme('textColor.accent.DEFAULT'),
+                            color: theme('colors.blue.DEFAULT'),
                         },
                         'blockquote, strong': {
-                            color: theme('textColor.tertiary.DEFAULT'),
+                            color: theme('colors.gray'),
                         },
                         code: {
-                            color: theme('textColor.tertiary.DEFAULT'),
+                            color: theme('colors.gray'),
                             fontWeight: 500,
                         },
                         'code::before, code::after': {
@@ -84,24 +65,24 @@ module.exports = {
 
                 dark: {
                     css: {
-                        color: theme('textColor.tertiary.dark'),
+                        color: theme('colors.gray.light'),
                         a: {
-                            color: theme('textColor.tertiary.dark'),
+                            color: theme('colors.gray.light'),
                             '&:hover': {
-                                color: theme('textColor.accent.dark'),
+                                color: theme('colors.green.DEFAULT'),
                             },
                         },
                         h1: {
-                            color: theme('textColor.primary.dark'),
+                            color: theme('colors.gray.lightest'),
                         },
                         'h2, h3, h4, h5, h6': {
-                            color: theme('textColor.accent.dark'),
+                            color: theme('colors.green.DEFAULT'),
                         },
                         'blockquote, strong': {
-                            color: theme('textColor.tertiary.dark'),
+                            color: theme('colors.gray.light'),
                         },
                         code: {
-                            color: theme('textColor.tertiary.dark'),
+                            color: theme('colors.gray.light'),
                         },
                     },
                 },

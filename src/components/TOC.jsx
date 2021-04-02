@@ -28,8 +28,8 @@ export default function TOC({ headings, defaultTarget }) {
             className="sticky top-16 hidden lg:block max-w-xs ml-6 mt-8 h-screen"
             data-cy="toc"
         >
-            <nav className="text-tertiary">
-                <h2 className="mb-2 font-normal text-accent dark:text-accent-dark tracking-widest">
+            <nav className="text-gray">
+                <h2 className="mb-2 font-normal text-blue dark:text-green tracking-widest">
                     TABLE OF CONTENTS
                 </h2>
 
@@ -40,9 +40,9 @@ export default function TOC({ headings, defaultTarget }) {
                         className={cx('block mt-3 text-sm', {
                             [`ml-${(heading.depth - 1) * 3}`]:
                                 heading.depth > 1,
-                            'text-tertiary hover:text-accent dark:text-tertiary-dark dark:hover:text-accent-dark':
+                            'text-gray dark:text-gray-light hover:text-blue dark:hover:text-green':
                                 target !== heading.target,
-                            'text-accent dark:text-accent-dark':
+                            'text-blue dark:text-green':
                                 target === heading.target,
                         })}
                         data-cy={`heading-${key}-${heading.depth}`}

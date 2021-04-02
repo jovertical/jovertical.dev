@@ -29,7 +29,7 @@ export default function ArticlePage({ article }) {
                             className="max-w-xl md:max-w-3xl"
                             data-cy="header"
                         >
-                            <div className="text-sm text-tertiary dark:text-tertiary-dark tracking-normal">
+                            <div className="text-sm text-gray dark:text-gray-light tracking-normal">
                                 {article._publishedAt ? (
                                     <time
                                         dateTime={article._publishedAt}
@@ -52,7 +52,7 @@ export default function ArticlePage({ article }) {
 
                             <h1
                                 id="introduction"
-                                className="text-primary dark:text-primary-dark text-4xl leading-tight md:text-5xl md:leading-none font-bold"
+                                className="text-gray-dark dark:text-gray-lightest text-4xl leading-tight md:text-5xl md:leading-none font-bold"
                                 data-cy="title"
                             >
                                 {article.title}
@@ -68,12 +68,12 @@ export default function ArticlePage({ article }) {
                         />
                     </article>
 
+                    {/* prettier-ignore */}
                     <TOC
                         headings={article.headings}
                         defaultTarget={
                             router.asPath.includes('#')
-                                ? '#' +
-                                  router.asPath.split('#').reverse().first()
+                                ? '#' + router.asPath.split('#').reverse().first()
                                 : null
                         }
                     />

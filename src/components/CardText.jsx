@@ -7,9 +7,9 @@ export default function CardText({
         className: cx(
             {
                 'text-lg font-bold': variant === 'title',
-                'text-sm text-secondary dark:text-secondary-dark':
+                'text-sm text-gray dark:text-gray-lighter':
                     variant === 'subtitle',
-                'text-tertiary dark:text-tertiary-dark leading-relaxed':
+                'text-gray dark:text-gray-light leading-relaxed':
                     variant === 'paragraph',
             },
             className,

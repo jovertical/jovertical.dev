@@ -9,7 +9,7 @@ export default function ThemeFlipper({ className }) {
     return (
         <button
             className={cx(
-                'block text-secondary dark:text-secondary-dark hover:text-accent dark:hover:text-accent-dark font-bold focus:outline-none transform transition-colors duration-200',
+                'block text-gray dark:text-gray-lighter hover:text-blue dark:hover:text-green font-bold focus:outline-none transform transition-colors duration-200',
                 className,
             )}
             title={`Switch to ${theme.dark ? 'Light mode' : 'Dark mode'}`}

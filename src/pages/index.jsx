@@ -14,7 +14,7 @@ export default function Welcome({ articles }) {
 
                 <div className="mt-12 flex flex-col-reverse lg:flex-row items-center lg:justify-between lg:space-x-6">
                     <h1
-                        className="mt-12 lg:mt-0 max-w-3xl text-3xl sm:text-4xl sm:text-left md:text-center lg:text-left leading-snug md:leading-normal text-primary dark:text-primary-dark font-semibold"
+                        className="mt-12 lg:mt-0 max-w-3xl text-3xl sm:text-4xl sm:text-left md:text-center lg:text-left leading-snug md:leading-normal text-gray-dark dark:text-gray-lightest font-semibold"
                         data-cy="title"
                     >
                         Hi, I&apos;m Jovert. <br className="mb-6 lg:hidden" />A
@@ -25,7 +25,7 @@ export default function Welcome({ articles }) {
             </header>
 
             <section className="mt-64" data-cy="featured-articles">
-                <h2 className="font-normal text-accent dark:text-accent-dark tracking-widest">
+                <h2 className="font-normal text-blue dark:text-green tracking-widest">
                     FEATURED ARTICLES
                 </h2>
 
