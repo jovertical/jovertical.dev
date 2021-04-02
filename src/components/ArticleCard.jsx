@@ -17,7 +17,7 @@ export default function ArticleCard({
         <Card {...props}>
             <CardText
                 variant="title"
-                className=" hover:text-accent dark:hover:text-accent-dark"
+                className="hover:text-accent dark:hover:text-accent-dark"
             >
                 <Link as={`/articles/${slug}`} href="/articles/[slug]">
                     {title}
