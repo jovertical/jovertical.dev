@@ -54,26 +54,26 @@ jobs:
   #         browser: firefox
   #         headless: true
 
-  # edge-integration-test:
-  #   runs-on: windows-latest
+  edge-integration-test:
+    runs-on: windows-latest
 
-  #   strategy:
-  #     matrix:
-  #       node: ['14.x']
+    strategy:
+      matrix:
+        node: ['14.x']
 
-  #   steps:
-  #     - name: Setup Checkout
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Setup Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Install dependencies
-  #       run: npm install
+      - name: Install dependencies
+        run: npm install --only=prod
 
-  #     - name: Execute tests
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         start: npm run dev:integration
-  #         browser: edge
-  #         headless: true
+      - name: Execute tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run dev:integration
+          browser: edge
+          headless: true
 
   # deploy:
   #   - name: Setup Checkout
