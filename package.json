@@ -5,7 +5,6 @@
         "test:lint:fix": "npm run test:lint -- --fix",
         "test:unit": "",
         "test:integration": "cypress run --headless",
-        "test": "npm run test:lint && npm run test:unit && npm run test:integration",
         "format": "prettier --write \"src/**/*.(js|jsx)\"",
         "dev": "npm run setup && next dev",
         "dev:integration": "npm run setup && TEST_ENV=integration next dev --port 5000",

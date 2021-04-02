@@ -22,12 +22,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Execute tests
+      - name: Execute initial tests
         run: |
           npm run test:lint
           npm run test:unit
-          npm run dev:integration
-          npm run test:integration
+
+      - name: Execute integration tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run dev:integration
+          headless: true
 
       - name: Deploy
         uses: amondnet/vercel-action@v20
