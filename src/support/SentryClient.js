@@ -18,7 +18,7 @@ export default class SentryClient {
      * @return {bool}
      */
     enabled() {
-        return process.env.NODE_ENV === 'production' && this.dsn;
+        return false;
     }
 
     /**
