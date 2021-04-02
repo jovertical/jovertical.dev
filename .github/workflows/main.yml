@@ -13,9 +13,6 @@ jobs:
 
     environment: Production
 
-    env:
-      NODE_ENV: ${{ secrets.NODE_ENV }}
-
     strategy:
       matrix:
         node: ['14.x']
@@ -37,6 +34,8 @@ jobs:
         with:
           start: npm run dev:integration
           headless: true
+          env:
+            CYPRESS_NODE_ENV: ${{ secrets.NODE_ENV }}
 
       - name: Deploy
         uses: amondnet/vercel-action@v20
