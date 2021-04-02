@@ -31,7 +31,6 @@ export default class SentryClient {
 
         if (instance.enabled()) {
             Sentry.init({
-                enabled: true,
                 integrations: instance.integrations(),
                 dsn: instance.dsn,
                 release: instance.release,
