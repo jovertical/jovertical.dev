@@ -29,12 +29,14 @@ export default class SentryClient {
     static init() {
         let instance = new SentryClient();
 
-        Sentry.init({
-            enabled: instance.enabled(),
-            integrations: instance.integrations(),
-            dsn: instance.dsn,
-            release: instance.release,
-        });
+        if (instance.enabled()) {
+            Sentry.init({
+                enabled: true,
+                integrations: instance.integrations(),
+                dsn: instance.dsn,
+                release: instance.release,
+            });
+        }
     }
 
     /**
