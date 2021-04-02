@@ -31,7 +31,7 @@ export default function Articles({ articles }) {
 }
 
 export async function getStaticProps() {
-  let articles = await Article.withAttribute(['minuteRead']).get()
+  let articles = await Article.append(['minuteRead']).get()
 
   try {
     let rss = generateRss(articles)

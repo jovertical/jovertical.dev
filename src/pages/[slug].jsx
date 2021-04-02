@@ -30,7 +30,7 @@ export async function getStaticProps({ params, preview = false }) {
     props: {
       preview,
       page: await PageModel.query(preview)
-        .withAttribute(['bodyMarkup'])
+        .append(['bodyMarkup'])
         .find(params?.slug),
     },
   }

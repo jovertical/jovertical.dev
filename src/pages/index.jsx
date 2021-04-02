@@ -50,7 +50,7 @@ export default function Welcome({ articles }) {
 export async function getStaticProps() {
   return {
     props: {
-      articles: await Article.withAttribute(['minuteRead']).get(),
+      articles: await Article.append(['minuteRead']).get(),
     },
   }
 }
