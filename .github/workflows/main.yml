@@ -32,7 +32,6 @@ jobs:
         env:
           CYPRESS_NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
           CYPRESS_NEXT_PUBLIC_SENTRY_SERVER_ROOT_DIR: /var/task
-
         with:
           start: npm run dev:integration
           browser: chrome
