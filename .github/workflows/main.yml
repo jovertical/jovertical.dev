@@ -8,29 +8,29 @@ name: Deploy
 on: [push]
 
 jobs:
-  chrome-integration-test:
-    runs-on: ubuntu-latest
+  # chrome-integration-test:
+  #   runs-on: ubuntu-20.04
 
-    strategy:
-      matrix:
-        node: ['12.x']
+  #   strategy:
+  #     matrix:
+  #       node: ['14.x']
 
-    steps:
-      - name: Setup Checkout
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Setup Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm install --only=prod
+  #     - name: Install dependencies
+  #       run: npm install --only=prod
 
-      - name: Execute tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run dev:integration
-          browser: chrome
-          headless: true
+  #     - name: Execute tests
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         start: npm run dev:integration
+  #         browser: chrome
+  #         headless: true
 
   firefox-integration-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     container:
       image: cypress/browsers:node12.16.1-chrome80-ff73
@@ -38,7 +38,7 @@ jobs:
 
     strategy:
       matrix:
-        node: ['12.x']
+        node: ['14.x']
 
     steps:
       - name: Setup Checkout
@@ -54,26 +54,26 @@ jobs:
           browser: firefox
           headless: true
 
-  edge-integration-test:
-    runs-on: macos-latest
+  # edge-integration-test:
+  #   runs-on: macos-latest
 
-    strategy:
-      matrix:
-        node: ['12.x']
+  #   strategy:
+  #     matrix:
+  #       node: ['14.x']
 
-    steps:
-      - name: Setup Checkout
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Setup Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm install --only=prod
+  #     - name: Install dependencies
+  #       run: npm install --only=prod
 
-      - name: Execute tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run dev:integration
-          browser: edge
-          headless: true
+  #     - name: Execute tests
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         start: npm run dev:integration
+  #         browser: edge
+  #         headless: true
 
   # deploy:
   #   - name: Setup Checkout
