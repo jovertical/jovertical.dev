@@ -2,10 +2,12 @@ import * as React from 'react';
 import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
+import Badge from '@/components/Badge';
 import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import TOC from '@/components/TOC';
 import Article from '@/models/Article';
+import Link from '@/components/Link';
 
 export default function ArticlePage({ article }) {
     let router = useRouter();
@@ -58,6 +60,23 @@ export default function ArticlePage({ article }) {
                             >
                                 {article.title}
                             </h1>
+
+                            {article.tags?.length > 0 && (
+                                <div
+                                    className="flex mt-1.5 md:mt-2 space-x-2 md:space-x-2.5"
+                                    data-cy="tags"
+                                >
+                                    {article.tags.map((tag) => (
+                                        <Link
+                                            key={tag.id}
+                                            href={`/articles?tag=${tag.name}`}
+                                            data-cy={'tag-' + tag.id}
+                                        >
+                                            <Badge text={tag.name} />
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
                         </header>
 
                         <div

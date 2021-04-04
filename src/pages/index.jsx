@@ -51,7 +51,6 @@ export async function getStaticProps() {
     return {
         props: {
             articles: await Article.query()
-                .with(['tags'])
                 .append(['minuteRead'])
                 .get({
                     featured: { eq: true },
