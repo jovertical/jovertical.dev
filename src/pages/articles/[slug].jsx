@@ -89,6 +89,7 @@ export async function getStaticProps({ params, preview = false }) {
         props: {
             preview,
             article: await Article.query(preview)
+                .with(['tags'])
                 .append(['bodyMarkup', 'minuteRead', 'headings'])
                 .find(params?.slug),
         },

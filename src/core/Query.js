@@ -9,13 +9,20 @@ export default class Query {
         return this;
     }
 
+    with(relations = []) {
+        this.loadableRelations = relations;
+        return this;
+    }
+
     async find(key) {
         let { modelName, keyName } = this.model;
 
+        // prettier-ignore
         let query = `
             query ${modelName}By ($${keyName}: String) {
                 ${modelName} (filter: { ${keyName}: { eq: $${keyName} } }) {
                     ${this.model.attributeMapping.join('\n\t')}
+                    ${this.buildRelationString()}
                 }
             }
         `;
@@ -36,6 +43,7 @@ export default class Query {
             query ${this.model.modelName}List {
                 ${this.model.listName + (filter ? ` (filter: ${Jovertical.toQuery(filter)})` : '')}  {
                     ${this.model.attributeMapping.join('\n\t')}
+                    ${this.buildRelationString()}
                 }
             }
         `);
@@ -77,5 +85,18 @@ export default class Query {
         }
 
         return json.data;
+    }
+
+    buildRelationString() {
+        // prettier-ignore
+        return `
+            ${[].concat(this.loadableRelations).filter(Boolean).map(relation => {
+                return `
+                    ${relation} {
+                        ${this.model.relations[relation].attributeMapping.join('\n\t')}
+                    }
+                `
+            })}
+        `
     }
 }
