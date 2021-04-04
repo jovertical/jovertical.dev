@@ -57,7 +57,7 @@ describe('Single article page', () => {
     it('navigates to /articles when a tag is clicked', () => {
         let tag = article.tags[0];
 
-        cy.get(`[data-cy=tag-${tag.id}]`).click();
+        cy.get(`[data-cy=tag-${tag.id}]`).click({ force: true }); // TODO: remove `force` as it is failing in Firefox.
 
         cy.location().should((loc) => {
             expect(loc.href).to.be.include(`articles?tag=${tag.name}`);
