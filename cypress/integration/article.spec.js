@@ -1,11 +1,14 @@
 import dayjs from 'dayjs';
 import articleFactory from '../factories/article';
+import tagFactory from '../factories/tag';
 
 describe('Single article page', () => {
     let article = null;
 
     before(() => {
-        cy.mock(articleFactory).then((data) => {
+        cy.mock(articleFactory, {
+            tags: [tagFactory.definition(), tagFactory.definition()],
+        }).then((data) => {
             article = data;
 
             cy.visit('/articles/' + article.slug);
@@ -22,6 +25,9 @@ describe('Single article page', () => {
         cy.get('[data-cy=minute-read]').should('not.be.empty');
 
         cy.get('[data-cy=title]').contains(article.title);
+
+        cy.get('[data-cy=tags]').should('exist');
+        cy.get('[data-cy=tags]').children().should('have.length', 2);
     });
 
     it('has body', () => {
@@ -47,4 +53,14 @@ describe('Single article page', () => {
     });
 
     it.skip('has a comment section', () => {});
+
+    it('navigates to /articles when a tag is clicked', () => {
+        let tag = article.tags[0];
+
+        cy.get(`[data-cy=tag-${tag.id}]`).click();
+
+        cy.location().should((loc) => {
+            expect(loc.href).to.be.include(`articles?tag=${tag.name}`);
+        });
+    });
 });

@@ -13,6 +13,10 @@ export let createHandlers = (data) => [
         return res(ctx.data({ allTags: data }));
     }),
 
+    graphql.query('tagBy', (req, res, ctx) => {
+        return res(ctx.data({ tag: data[0] }));
+    }),
+
     graphql.query('projectList', (req, res, ctx) => {
         return res(ctx.data({ allProjects: data }));
     }),
