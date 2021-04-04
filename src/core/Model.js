@@ -21,6 +21,10 @@ export default class Model {
         return this.newQuery().append(keys);
     }
 
+    static with(relations = []) {
+        return this.newQuery().with(relations);
+    }
+
     static newModel(attributes = {}) {
         return Reflect.construct(this, [attributes]);
     }

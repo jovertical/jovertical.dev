@@ -1,26 +1,26 @@
-import factory from '../factories/article'
+import articleFactory from '../factories/article';
 
 describe('Article listing page', () => {
-  let articles = []
+    let articles = [];
 
-  before(() => {
-    cy.mock(factory, {}, 10).then((data) => {
-      articles = data
+    before(() => {
+        cy.mock(articleFactory, {}, 10).then((data) => {
+            articles = data;
 
-      cy.visit('/articles')
-    })
-  })
+            cy.visit('/articles');
+        });
+    });
 
-  it('has heading', () => {
-    cy.get('[data-cy=title]').contains('Articles')
-    cy.get('[data-cy=description]').should('not.be.empty')
-  })
+    it('has heading', () => {
+        cy.get('[data-cy=title]').contains('Articles');
+        cy.get('[data-cy=description]').should('not.be.empty');
+    });
 
-  it('displays a list of articles', () => {
-    cy.get('article').should('have.length', articles.length)
-  })
+    it('displays a list of articles', () => {
+        cy.get('article').should('have.length', articles.length);
+    });
 
-  it.skip('has pagination', () => {})
+    it.skip('has pagination', () => {});
 
-  it.skip('has archive sidebar', () => {})
-})
+    it.skip('has archive sidebar', () => {});
+});
