@@ -6,5 +6,5 @@ export default async function estimateMinuteRead(content) {
     let result = await unified().use(markdown).use(stringify).process(content);
     let characterCount = result.toString().length;
 
-    return Math.round(characterCount / 400) || 1;
+    return Math.round(characterCount / 650) || 1;
 }
