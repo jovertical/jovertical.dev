@@ -13,8 +13,8 @@ export default class Model {
         return this.query(true);
     }
 
-    static async get() {
-        return this.newQuery().get();
+    static async get(filter = null) {
+        return this.newQuery().get(filter);
     }
 
     static append(keys = []) {

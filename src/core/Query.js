@@ -13,12 +13,12 @@ export default class Query {
         let { modelName, keyName } = this.model;
 
         let query = `
-      query ${modelName}By ($${keyName}: String) {
-        ${modelName} (filter: { ${keyName}: { eq: $${keyName} } }) {
-          ${this.model.attributeMapping.join('\n\t')}
-        }
-      }
-    `;
+            query ${modelName}By ($${keyName}: String) {
+                ${modelName} (filter: { ${keyName}: { eq: $${keyName} } }) {
+                    ${this.model.attributeMapping.join('\n\t')}
+                }
+            }
+        `;
 
         let response = await this.run(query, { [keyName]: key });
         let attributes = response[modelName];
@@ -30,14 +30,15 @@ export default class Query {
         return (await this.prepare(attributes))?.first() || null;
     }
 
-    async get() {
+    async get(filter = null) {
+        // prettier-ignore
         let response = await this.run(`
-      query ${this.model.modelName}List {
-        ${this.model.listName} {
-          ${this.model.attributeMapping.join('\n\t')}
-        }
-      }
-    `);
+            query ${this.model.modelName}List {
+                ${this.model.listName + (filter ? ` (filter: ${Jovertical.toQuery(filter)})` : '')}  {
+                    ${this.model.attributeMapping.join('\n\t')}
+                }
+            }
+        `);
 
         return this.prepare(response[this.model.listName] || []);
     }
