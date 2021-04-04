@@ -1,3 +1,4 @@
+import * as React from 'react';
 import ls from '@/helpers/ls';
 
 export let ThemeContext = React.createContext();
