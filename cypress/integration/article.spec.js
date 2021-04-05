@@ -57,10 +57,10 @@ describe('Single article page', () => {
     it('navigates to /articles when a tag is clicked', () => {
         let tag = article.tags[0];
 
-        cy.get(`[data-cy=tag-${tag.id}]`).focus().click();
+        cy.get(`[data-cy=tag-${tag.id}]`).focus().click({ force: true });
 
         cy.location().should((loc) => {
-            expect(loc.href).to.be.include(`articles?tag=${tag.name}`);
+            expect(loc.href).to.include(`articles?tag=${tag.name}`);
         });
     });
 });
