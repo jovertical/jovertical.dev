@@ -5,9 +5,13 @@ export default function TOC({ headings, defaultTarget }) {
 
     function scrollEventListener() {
         for (let t of headings.map((h) => h.target)) {
-            let targetPosition = document
-                .querySelector(t)
-                .getBoundingClientRect().top;
+            let targetEl = document.querySelector(t);
+
+            if (!targetEl) {
+                continue;
+            }
+
+            let targetPosition = targetEl.getBoundingClientRect().top;
 
             if (targetPosition >= 0 && targetPosition <= 400) {
                 setTarget(t);
