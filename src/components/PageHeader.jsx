@@ -10,7 +10,7 @@ export default function PageHeader({ title, description }) {
             />
 
             <h1
-                className="text-4xl font-extrabold text-blue dark:text-green"
+                className="text-4xl font-extrabold text-blue dark:text-turquoise"
                 data-cy="title"
             >
                 {title}

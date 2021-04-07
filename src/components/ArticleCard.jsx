@@ -17,7 +17,7 @@ export default function ArticleCard({
         <Card {...props}>
             <CardText
                 variant="title"
-                className="hover:text-blue dark:hover:text-green"
+                className="hover:text-blue dark:hover:text-turquoise"
             >
                 <Link as={`/articles/${slug}`} href="/articles/[slug]">
                     {title}
@@ -46,7 +46,7 @@ export default function ArticleCard({
 
             <div className="mt-6">
                 <Link
-                    className="inline-flex items-center hover:text-blue dark:hover:text-green"
+                    className="inline-flex items-center hover:text-blue dark:hover:text-turquoise"
                     as={`/articles/${slug}`}
                     href="/articles/[slug]"
                 >

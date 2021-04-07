@@ -35,7 +35,7 @@ export default function TOC({ headings, defaultTarget }) {
             data-cy="toc"
         >
             <nav className="text-gray">
-                <h2 className="mb-2 font-normal text-blue dark:text-green tracking-widest">
+                <h2 className="mb-2 font-normal text-blue dark:text-turquoise tracking-widest">
                     TABLE OF CONTENTS
                 </h2>
 
@@ -45,9 +45,9 @@ export default function TOC({ headings, defaultTarget }) {
                         href={heading.target}
                         className={cx('block mt-3 text-sm', {
                             [`ml-${heading.depth * 3}`]: heading.depth > 1,
-                            'text-gray dark:text-gray-light hover:text-blue dark:hover:text-green':
+                            'text-gray dark:text-gray-light hover:text-blue dark:hover:text-turquoise':
                                 target !== heading.target,
-                            'text-blue dark:text-green':
+                            'text-blue dark:text-turquoise':
                                 target === heading.target,
                         })}
                         data-cy={`heading-${key}-${heading.depth}`}

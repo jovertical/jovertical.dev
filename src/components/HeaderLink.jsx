@@ -8,8 +8,8 @@ export default function HeaderLink({ href, children }) {
         <Link
             href={href}
             className={cx('font-normal text-base transition duration-150', {
-                'text-blue dark:text-green': router.asPath === href,
-                'text-gray dark:text-gray-lighter hover:text-blue dark:hover:text-green':
+                'text-blue dark:text-turquoise': router.asPath === href,
+                'text-gray dark:text-gray-lighter hover:text-blue dark:hover:text-turquoise':
                     router.asPath !== href,
             })}
         >

@@ -25,7 +25,7 @@ export default function Welcome({ articles }) {
             </header>
 
             <section className="mt-64" data-cy="featured-articles">
-                <h2 className="font-normal text-blue dark:text-green tracking-widest">
+                <h2 className="font-normal text-blue dark:text-turquoise tracking-widest">
                     FEATURED ARTICLES
                 </h2>
 

@@ -50,7 +50,7 @@ function ProjectExternalLink({ href, label, className, ...props }) {
     return (
         <ExternalLink
             className={cx(
-                'inline-flex items-center text-gray dark:text-gray-light hover:text-blue dark:hover:text-green',
+                'inline-flex items-center text-gray dark:text-gray-light hover:text-blue dark:hover:text-turquoise',
                 className,
             )}
             href={href}

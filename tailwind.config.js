@@ -7,12 +7,17 @@ module.exports = {
     theme: {
         colors: {
             blue: {
-                light: '#63b3ed',
-                DEFAULT: '#2b6cb0',
+                lightest: '#caf0f8',
+                light: '#48cae4',
+                DEFAULT: '#0077b6',
+                dark: '#023e8a',
             },
 
-            green: {
-                DEFAULT: '#81e6d9',
+            turquoise: {
+                lightest: '#a4ece6',
+                DEFAULT: '#37cac1',
+                dark: '#00b9ae',
+                darkest: '#124442',
             },
 
             gray: {
@@ -69,14 +74,14 @@ module.exports = {
                         a: {
                             color: theme('colors.gray.light'),
                             '&:hover': {
-                                color: theme('colors.green.DEFAULT'),
+                                color: theme('colors.turquoise.DEFAULT'),
                             },
                         },
                         h1: {
                             color: theme('colors.gray.lightest'),
                         },
                         'h2, h3, h4, h5, h6': {
-                            color: theme('colors.green.DEFAULT'),
+                            color: theme('colors.turquoise.DEFAULT'),
                         },
                         'blockquote, strong': {
                             color: theme('colors.gray.light'),

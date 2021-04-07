@@ -19,6 +19,6 @@ html {
 
 @layer utilities {
     .selection {
-        @apply bg-blue-light dark:bg-green text-white dark:text-gray-dark;
+        @apply bg-blue-light dark:bg-turquoise text-white dark:text-gray-dark;
     }
 }
