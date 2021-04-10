@@ -17,7 +17,6 @@ export default class Query {
     async find(key) {
         let { modelName, keyName } = this.model;
 
-        // prettier-ignore
         let query = `
             query ${modelName}By ($${keyName}: String) {
                 ${modelName} (filter: { ${keyName}: { eq: $${keyName} } }) {
@@ -51,6 +50,11 @@ export default class Query {
         return this.prepare(response[this.model.listName] || []);
     }
 
+    async first(filter) {
+        let data = await this.get(filter);
+        return data.length > 0 ? data[0] : null;
+    }
+
     async prepare(collection) {
         let models = await Promise.all(
             [].concat(collection).map((item) => {
@@ -68,7 +72,7 @@ export default class Query {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${process.env.DATOCMS_API_TOKEN}`,
+                    Authorization: `Bearer ${process.env.NEXT_PUBLIC_DATO_CMS_API_TOKEN}`,
                 },
                 body: JSON.stringify({
                     query,

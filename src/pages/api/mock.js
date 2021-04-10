@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import '@/bootstrap';
 import { sleep } from '@/helpers';
 
@@ -6,7 +6,7 @@ export default async (req, res) => {
     if (req.method === 'POST') {
         let data = JSON.stringify(req.body);
 
-        await writeAsync('src/mocks/data.json', data);
+        await fs.writeFile('src/mocks/data.json', data);
         await sleep();
 
         return res.end(data);
@@ -14,15 +14,3 @@ export default async (req, res) => {
 
     return res.end();
 };
-
-async function writeAsync(path, data) {
-    return new Promise((resolve, reject) => {
-        fs.writeFile(path, data, (err) => {
-            if (err) {
-                return reject(err);
-            }
-
-            resolve();
-        });
-    });
-}

@@ -1,10 +1,21 @@
+import random from 'lodash.random';
+import range from 'lodash.range';
+import collect from 'collect.js';
 import articleFactory from '../factories/article';
+import tagFactory from '../factories/tag';
 
 describe('Article listing page', () => {
+    let tags = range(10).map(() => tagFactory.definition());
     let articles = [];
 
     before(() => {
-        cy.mock(articleFactory, {}, 10).then((data) => {
+        cy.mock(
+            articleFactory,
+            {
+                tags: collect(tags).random(random(1, 5)).toArray(),
+            },
+            random(5, 10),
+        ).then((data) => {
             articles = data;
 
             cy.visit('/articles');
@@ -20,7 +31,11 @@ describe('Article listing page', () => {
         cy.get('article').should('have.length', articles.length);
     });
 
-    it.skip('has pagination', () => {});
+    it.skip('displays a list filtered by the tag', () => {
+        //
+    });
 
-    it.skip('has archive sidebar', () => {});
+    it.skip('has pagination', () => {
+        //
+    });
 });

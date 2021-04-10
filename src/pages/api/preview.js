@@ -4,7 +4,7 @@ import Page from '@/models/Page';
 
 export default async (req, res) => {
     // This secret should only be known to this API route and the CMS
-    if (req.query.secret !== process.env.DATOCMS_PREVIEW_SECRET) {
+    if (req.query.secret !== process.env.NEXT_PUBLIC_DATO_CMS_PREVIEW_SECRET) {
         return res.status(401).json({ message: 'Invalid token' });
     }
 

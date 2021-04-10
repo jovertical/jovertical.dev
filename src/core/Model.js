@@ -17,6 +17,14 @@ export default class Model {
         return this.newQuery().get(filter);
     }
 
+    static async first(filter = null) {
+        return this.newQuery().first(filter);
+    }
+
+    static async find(key = null) {
+        return this.newQuery().find(key);
+    }
+
     static append(keys = []) {
         return this.newQuery().append(keys);
     }
