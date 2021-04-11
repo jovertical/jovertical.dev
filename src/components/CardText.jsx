@@ -8,7 +8,7 @@ export default function CardText({
     return React.createElement(variant === 'heading' ? 'h3' : 'p', {
         className: cx(
             {
-                'text-lg font-bold': variant === 'title',
+                'text-lg font-bold leading-snug': variant === 'title',
                 'text-sm text-gray dark:text-gray-lighter':
                     variant === 'subtitle',
                 'text-gray dark:text-gray-light leading-relaxed':

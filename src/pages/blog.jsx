@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import range from 'lodash.range';
 import random from 'lodash.random';
+import dayjs from 'dayjs';
 import fs from 'fs/promises';
 import ArticleCard from '@/components/ArticleCard';
 import ArticleCardSkeleton from '@/components/ArticleCardSkeleton';
@@ -82,23 +83,29 @@ export default function Blog(props) {
                 )}
             </div>
 
-            <div className="mt-6">
-                <p className="text-gray dark:text-gray-lighter">
-                    Read the rest of my writings in the&nbsp;
-                    <Link
-                        className="underline hover:text-blue dark:hover:text-turquoise"
-                        href="/archives"
-                    >
-                        archives
-                    </Link>
-                </p>
-            </div>
+            {articles.length > 0 && (
+                <div className="mt-6">
+                    <p className="text-gray dark:text-gray-lighter">
+                        Read the rest of my articles in the&nbsp;
+                        <Link
+                            className="underline hover:text-blue dark:hover:text-turquoise"
+                            href="/archives"
+                        >
+                            archives
+                        </Link>
+                    </p>
+                </div>
+            )}
         </Layout>
     );
 }
 
 export async function getStaticProps() {
-    let articles = await Article.append(['minuteRead']).get();
+    let articles = await Article.append(['minuteRead']).get({
+        _publishedAt: {
+            gte: dayjs().subtract(1, 'year').toISOString(),
+        },
+    });
 
     try {
         let rss = generateRss(articles);
