@@ -6,12 +6,13 @@ import fs from 'fs/promises';
 import ArticleCard from '@/components/ArticleCard';
 import ArticleCardSkeleton from '@/components/ArticleCardSkeleton';
 import Layout from '@/components/Layout';
+import Link from '@/components/Link';
 import PageHeader from '@/components/PageHeader';
 import generateRss from '@/helpers/generateRss';
 import Article from '@/models/Article';
 import Tag from '@/models/Tag';
 
-export default function Articles(props) {
+export default function Blog(props) {
     let router = useRouter();
     let [loading, setLoading] = React.useState(false);
     let [articles, setArticles] = React.useState(props.articles);
@@ -55,7 +56,7 @@ export default function Articles(props) {
         <Layout>
             <PageHeader
                 title="Articles"
-                description="My personal thoughts on web development and programming. Being a full stack software engineer, I encounter a lot of problems and I just love sharing how I solved these problems, so I write it down here."
+                description="All of the articles I published for the past year."
             />
 
             <div className="mt-8 -mx-4 md:-mx-6 space-y-6">
@@ -79,6 +80,18 @@ export default function Articles(props) {
                         ))}
                     </>
                 )}
+            </div>
+
+            <div className="mt-6">
+                <p className="text-gray dark:text-gray-lighter">
+                    Read the rest of my writings in the&nbsp;
+                    <Link
+                        className="underline hover:text-blue dark:hover:text-turquoise"
+                        href="/archives"
+                    >
+                        archives
+                    </Link>
+                </p>
             </div>
         </Layout>
     );

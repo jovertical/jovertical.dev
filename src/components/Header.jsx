@@ -14,9 +14,8 @@ export default function Header() {
                 >
                     <span className="hidden sm:flex flex-grow items-center space-x-6">
                         <HeaderLink href="/">Home</HeaderLink>
-                        <HeaderLink href="/articles">Articles</HeaderLink>
-                        <HeaderLink href="/projects">Projects</HeaderLink>
-                        <HeaderLink href="/about">About</HeaderLink>
+                        <HeaderLink href="/blog">Writings</HeaderLink>
+                        <HeaderLink href="/projects">Creations</HeaderLink>
                     </span>
 
                     <ThemeFlipper className="hidden md:block" />
