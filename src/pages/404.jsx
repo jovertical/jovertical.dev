@@ -88,7 +88,7 @@ export default function NotFound() {
                 </svg>
 
                 <div className="mt-4 md:mt-8">
-                    <p className="px-6 font-medium text-center text-xl md:text-2xl text-gray-lightest">
+                    <p className="px-6 font-medium text-center text-xl md:text-2xl text-gray-darkest dark:text-gray-lightest">
                         Looks like you are lost my friend.
                         <NextLink href="/">
                             <a className="ml-1.5 text-blue hover:text-blue-dark dark:text-turquoise dark:hover:text-turquoise-dark">
