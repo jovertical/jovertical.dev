@@ -26,7 +26,7 @@ export default async (req, res) => {
     // Redirect to the path from the fetched model
     // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
     res.writeHead(307, {
-        Location: `/articles/${content.slug}`.replace(/^\/+/g, ''),
+        Location: `/${content.slug}`.replace(/^\/+/g, ''),
     });
 
     res.end();
