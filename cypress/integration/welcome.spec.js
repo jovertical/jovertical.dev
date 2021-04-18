@@ -17,5 +17,6 @@ describe('Welcome page', () => {
 
     it('has a featured articles section', () => {
         cy.get('[data-cy=featured-articles]').should('exist');
+        cy.get('article').should('have.length', articles.length);
     });
 });
