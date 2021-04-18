@@ -8,12 +8,12 @@ export default async (req, res) => {
     }
 
     // Check if a slug is provided
-    if (!req.query.slug) {
+    if (!req.query.article) {
         res.status(404).json({ message: 'Slug is not provided' });
     }
 
     // Fetch the headless CMS to check if the provided `slug` exists
-    let content = await Article.queryPreview().find(slug);
+    let content = await Article.queryPreview().find(article);
 
     // If the slug doesn't exist prevent preview mode from being enabled
     if (!content) {

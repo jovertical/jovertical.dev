@@ -55,7 +55,7 @@ describe('Article page', () => {
     it('navigates to the blog page when a tag is clicked', () => {
         let tag = article.tags[0];
 
-        cy.get(`[data-cy=tag-${tag.id}]`).focus().click({ force: true });
+        cy.get(`[data-cy=tag-${tag.id}]`).focus().click();
 
         cy.location().should((loc) => {
             expect(loc.href).to.include(`blog?tag=${tag.name}`);

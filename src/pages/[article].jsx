@@ -110,7 +110,7 @@ export async function getStaticProps({ params, preview = false }) {
             article: await Article.query(preview)
                 .with(['tags'])
                 .append(['bodyMarkup', 'minuteRead', 'headings'])
-                .find(params?.slug),
+                .find(params?.article),
         },
     };
 }
