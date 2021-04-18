@@ -4,7 +4,7 @@ import collect from 'collect.js';
 import articleFactory from '../factories/article';
 import tagFactory from '../factories/tag';
 
-describe('Article listing page', () => {
+describe('Blog page', () => {
     let tags = range(10).map(() => tagFactory.definition());
     let articles = [];
 
@@ -18,7 +18,7 @@ describe('Article listing page', () => {
         ).then((data) => {
             articles = data;
 
-            cy.visit('/articles');
+            cy.visit('/blog');
         });
     });
 
@@ -33,6 +33,16 @@ describe('Article listing page', () => {
 
     it.skip('displays a list filtered by the tag', () => {
         //
+    });
+
+    it('has a link to the archives page', () => {
+        cy.get(`[data-cy=archives-link]`).focus().click({ force: true });
+
+        cy.location().should((loc) => {
+            expect(loc.href).to.include('archives');
+        });
+
+        cy.visit('/blog');
     });
 
     it.skip('has pagination', () => {

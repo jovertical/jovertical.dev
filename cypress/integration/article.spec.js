@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import articleFactory from '../factories/article';
 import tagFactory from '../factories/tag';
 
-describe('Single article page', () => {
+describe('Article page', () => {
     let article = null;
 
     before(() => {
@@ -11,7 +11,7 @@ describe('Single article page', () => {
         }).then((data) => {
             article = data;
 
-            cy.visit('/articles/' + article.slug);
+            cy.visit('/' + article.slug);
         });
     });
 
@@ -52,15 +52,13 @@ describe('Single article page', () => {
         });
     });
 
-    it.skip('has a comment section', () => {});
-
-    it('navigates to /articles when a tag is clicked', () => {
+    it('navigates to the blog page when a tag is clicked', () => {
         let tag = article.tags[0];
 
         cy.get(`[data-cy=tag-${tag.id}]`).focus().click({ force: true });
 
         cy.location().should((loc) => {
-            expect(loc.href).to.include(`articles?tag=${tag.name}`);
+            expect(loc.href).to.include(`blog?tag=${tag.name}`);
         });
     });
 });

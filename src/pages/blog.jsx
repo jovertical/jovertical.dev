@@ -90,6 +90,7 @@ export default function Blog(props) {
                         <Link
                             className="underline hover:text-blue dark:hover:text-turquoise"
                             href="/archives"
+                            data-cy="archives-link"
                         >
                             archives
                         </Link>
