@@ -1,6 +1,6 @@
 import projectFactory from '../factories/project';
 
-describe('Project listing page', () => {
+describe('Creations page', () => {
     let projects = [];
 
     before(() => {

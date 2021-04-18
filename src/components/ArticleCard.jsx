@@ -19,7 +19,7 @@ export default function ArticleCard({
                 variant="title"
                 className="hover:text-blue dark:hover:text-turquoise"
             >
-                <Link as={`/articles/${slug}`} href="/articles/[slug]">
+                <Link as={`/${slug}`} href="/[slug]">
                     {title}
                 </Link>
             </CardText>
@@ -47,8 +47,8 @@ export default function ArticleCard({
             <div className="mt-6">
                 <Link
                     className="inline-flex items-center hover:text-blue dark:hover:text-turquoise"
-                    as={`/articles/${slug}`}
-                    href="/articles/[slug]"
+                    as={`/${slug}`}
+                    href="/[slug]"
                 >
                     <span>Read more</span>
                     <Icon className="ml-1" variant="outlined" size="small">

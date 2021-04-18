@@ -9,9 +9,8 @@ export default function Footer() {
                 <div className="container flex-col justify-between md:space-y-8">
                     <nav className="hidden lg:flex flex-row items-center space-x-6 justify-center md:justify-end text-sm">
                         <FooterLink href="/">Home</FooterLink>
-                        <FooterLink href="/articles">Articles</FooterLink>
-                        <FooterLink href="/projects">Projects</FooterLink>
-                        <FooterLink href="/about">About</FooterLink>
+                        <FooterLink href="/blog">Writings</FooterLink>
+                        <FooterLink href="/projects">Creations</FooterLink>
                     </nav>
 
                     <div className="flex flex-col-reverse md:flex-row md:justify-between space-y-reverse space-y-8 md:space-y-0">
