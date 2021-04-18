@@ -42,15 +42,11 @@ export default function MobileNavigation() {
                         </div>
 
                         <div className="flex-grow">
-                            <Link href="/articles">ARTICLES</Link>
+                            <Link href="/blog">WRITINGS</Link>
                         </div>
 
                         <div className="flex-grow">
-                            <Link href="/projects">PROJECTS</Link>
-                        </div>
-
-                        <div className="flex-grow">
-                            <Link href="/about">ABOUT</Link>
+                            <Link href="/projects">CREATIONS</Link>
                         </div>
 
                         <ThemeFlipper />

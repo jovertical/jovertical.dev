@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
 import Badge from '@/components/Badge';
@@ -8,12 +7,13 @@ import SEO from '@/components/SEO';
 import TOC from '@/components/TOC';
 import Article from '@/models/Article';
 import Link from '@/components/Link';
+import NotFound from '@/pages/404';
 
 export default function ArticlePage({ article }) {
     let router = useRouter();
 
     if (!router.isFallback && !article?.slug) {
-        return <ErrorPage statusCode={404} />;
+        return <NotFound />;
     }
 
     return (
